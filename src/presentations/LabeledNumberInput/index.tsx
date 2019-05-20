@@ -5,6 +5,7 @@ export type LabeledNumberInputOnChange = (value: number) => void;
 
 export interface LabeledNumberInputProps {
   onChange: LabeledNumberInputOnChange;
+  className?: string;
   value: number;
   label?: string;
   placeholder?: string;
@@ -18,10 +19,11 @@ export class LabeledNumberInput extends Component<LabeledNumberInputProps> {
   }
 
   render() {
-    const { value, label, placeholder } = this.props;
+    const { className, value, label, placeholder } = this.props;
 
     return (
       <LabeledTextInput
+        className={className}
         onChange={this.handleChange}
         value={value.toString()}
         label={label}
