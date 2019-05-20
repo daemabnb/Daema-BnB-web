@@ -12,7 +12,7 @@ export const LabeledPriceInput = styled(LabeledNumberInput)`
 
 export const CurrencyMark = styled.div`
   position: absolute;
-  font-size: 16px;
-  bottom: 14px;
+  font-size: 18px;
+  bottom: 20px;
   right: 12px;
 `;
