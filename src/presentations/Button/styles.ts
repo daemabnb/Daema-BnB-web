@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 interface ButtonProps {
-  btnColor: string;
   size: 'big' | 'small';
 }
 
@@ -16,5 +15,5 @@ export const Button = styled.div`
   font-size: 16px;
   font-weight: 800;
   color: #fff;
-  background-color: ${(props: ButtonProps) => props.btnColor};
+  background-color: #008489;
 `;
