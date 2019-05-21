@@ -82,27 +82,23 @@ export class ImageUploader extends Component<
       </>
     );
 
-    const imageDraggableChild = image ? (
+    const imageUploaderChild = image ? (
       <DeletableImagePreview onDelete={onDelete} image={image} />
     ) : (
-      <S.TableCell isCoverImage={isCoverImage} isActive={onDraggingOver}>
-        {tableCellChild}
-      </S.TableCell>
+      <S.ImageUploadable
+        htmlFor={id}
+        onDragEnter={this.handleDragEnter}
+        onDragLeave={this.handleDragLeave}
+        onDragOver={this.handleDragOver}
+        onDrop={this.handleDrop}
+      >
+        <S.HiddenFileInput id={id} type="file" onChange={this.handleChange} />
+        <S.TableCell isCoverImage={isCoverImage} isActive={onDraggingOver}>
+          {tableCellChild}
+        </S.TableCell>
+      </S.ImageUploadable>
     );
 
-    return (
-      <S.ImageUploader>
-        <S.HiddenFileInput id={id} type="file" onChange={this.handleChange} />
-        <S.ImageUploadable
-          htmlFor={id}
-          onDragEnter={this.handleDragEnter}
-          onDragLeave={this.handleDragLeave}
-          onDragOver={this.handleDragOver}
-          onDrop={this.handleDrop}
-        >
-          {imageDraggableChild}
-        </S.ImageUploadable>
-      </S.ImageUploader>
-    );
+    return <S.ImageUploader>{imageUploaderChild}</S.ImageUploader>;
   }
 }

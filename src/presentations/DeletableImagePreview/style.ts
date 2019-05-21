@@ -32,6 +32,7 @@ export const ImagePreview = styled.div`
   background-position: center center;
   box-sizing: border-box;
   border-radius: 6px;
+  position: relative;
 
   ${({ backgroundImageUrl }: ImagePreviewProps) =>
     backgroundImageUrl &&
