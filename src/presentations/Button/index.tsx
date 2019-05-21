@@ -5,7 +5,7 @@ import * as S from './styles';
 interface Props {
   content?: string;
   size?: 'big' | 'small';
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const Button: React.FC<Props> = ({
