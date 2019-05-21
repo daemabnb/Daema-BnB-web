@@ -4,3 +4,4 @@ export * from './LabeledPriceInput';
 export * from './LabeledDescriptionInput';
 export * from './Button';
 export * from './DeletableImagePreview';
+export * from './ImageUploader';
