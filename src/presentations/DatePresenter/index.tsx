@@ -1,21 +1,20 @@
 import React from 'react';
 
 import * as S from './styles';
-import { formatDate } from '../../utils/formatDate';
+import { formatDate } from '../../utils';
 
-interface Props {
+interface DatePresenterProps {
   startDate: Date;
   endDate: Date;
 }
 
-export const DatePresenter: React.FC<Props> = ({ startDate, endDate }) => {
+export const DatePresenter: React.FC<DatePresenterProps> = ({
+  startDate,
+  endDate,
+}) => {
   return (
     <S.DatePresenter>
-      <S.DateDescription>
-        {`
-          ${formatDate(startDate)} ~ ${formatDate(endDate)}
-        `}
-      </S.DateDescription>
+      {`${formatDate(startDate)} ~ ${formatDate(endDate)}`}
     </S.DatePresenter>
   );
 };
