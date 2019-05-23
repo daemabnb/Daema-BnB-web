@@ -1,9 +1,5 @@
-import React from 'react';
+import styled from 'styled-components';
 
-import * as S from './styles';
-
-interface Props {}
-
-export const Divider: React.FC<Props> = () => {
-  return <S.Divider />;
-};
+export const Divider = styled.div`
+  border-top: 1px solid #ebebeb;
+`;
