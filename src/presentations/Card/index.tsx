@@ -1,15 +1,6 @@
 import React from 'react';
 
-import {
-  CardContainer,
-  CardImage,
-  ContentContainer,
-  ItemType,
-  ItemName,
-  ItemPrice,
-  DateDescription,
-  DateDescriptionContainer,
-} from './styles';
+import * as S from './styles';
 
 import { formatDate } from '../../utils/formatDate';
 
@@ -35,25 +26,27 @@ export const Card: React.FC<Props> = ({
   itemId,
 }) => {
   return (
-    <CardContainer>
-      <CardImage src={imageSrc} />
-      <ContentContainer>
-        <ItemType>{isPublic ? '공용물품' : '개인물품'}</ItemType>
-        <ItemName>{itemName}</ItemName>
-        <ItemPrice>{`${itemPrice}원/회`}</ItemPrice>
-        <DateDescriptionContainer>
+    <S.CardContainer>
+      <S.CardImage src={imageSrc} />
+      <S.ContentContainer>
+        <S.ItemType>{isPublic ? '공용물품' : '개인물품'}</S.ItemType>
+        <S.ItemName>{itemName}</S.ItemName>
+        <S.ItemPrice>{`${itemPrice}원/회`}</S.ItemPrice>
+        <S.DateDescriptionContainer>
           {startDate ? (
-            <DateDescription isLate={false}>
+            <S.DateDescription isLate={false}>
               {formatDate(startDate)}
-            </DateDescription>
+            </S.DateDescription>
           ) : null}
           {endDate ? (
-            <DateDescription isLate={currentDate.getTime() < endDate.getTime()}>
+            <S.DateDescription
+              isLate={currentDate.getTime() < endDate.getTime()}
+            >
               {formatDate(endDate)}
-            </DateDescription>
+            </S.DateDescription>
           ) : null}
-        </DateDescriptionContainer>
-      </ContentContainer>
-    </CardContainer>
+        </S.DateDescriptionContainer>
+      </S.ContentContainer>
+    </S.CardContainer>
   );
 };
