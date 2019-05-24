@@ -33,18 +33,18 @@ export const Card: React.FC<Props> = ({
         <S.ItemName>{itemName}</S.ItemName>
         <S.ItemPrice>{`${itemPrice}원/회`}</S.ItemPrice>
         <S.DateDescriptionWrapper>
-          {startDate ? (
+          {startDate && (
             <S.DateDescription isLate={false}>
               {formatDate(startDate)}
             </S.DateDescription>
-          ) : null}
-          {endDate ? (
+          )}
+          {endDate && (
             <S.DateDescription
               isLate={currentDate.getTime() < endDate.getTime()}
             >
               {formatDate(endDate)}
             </S.DateDescription>
-          ) : null}
+          )}
         </S.DateDescriptionWrapper>
       </S.Content>
     </S.Card>
