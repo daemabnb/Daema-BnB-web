@@ -26,13 +26,13 @@ export const Card: React.FC<Props> = ({
   itemId,
 }) => {
   return (
-    <S.CardContainer>
+    <S.Card>
       <S.CardImage src={imageSrc} />
-      <S.ContentContainer>
+      <S.Content>
         <S.ItemType>{isPublic ? '공용물품' : '개인물품'}</S.ItemType>
         <S.ItemName>{itemName}</S.ItemName>
         <S.ItemPrice>{`${itemPrice}원/회`}</S.ItemPrice>
-        <S.DateDescriptionContainer>
+        <S.DateDescriptionWrapper>
           {startDate ? (
             <S.DateDescription isLate={false}>
               {formatDate(startDate)}
@@ -45,8 +45,8 @@ export const Card: React.FC<Props> = ({
               {formatDate(endDate)}
             </S.DateDescription>
           ) : null}
-        </S.DateDescriptionContainer>
-      </S.ContentContainer>
-    </S.CardContainer>
+        </S.DateDescriptionWrapper>
+      </S.Content>
+    </S.Card>
   );
 };
