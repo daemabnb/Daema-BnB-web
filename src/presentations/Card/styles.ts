@@ -1,19 +1,29 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.div`
+export const Card = styled.div`
   width: 50%;
-  display: inline-block;
+  height: calc(30vw + 50px);
+  display: inline-flex;
+  flex-direction: column;
   padding: 8px 6px 12px;
   box-sizing: border-box;
 `;
 
-export const CardImage = styled.img`
-  width: 100%;
-  height: 66%;
+interface CardImageProps {
+  src: string;
+}
+
+export const CardImage = styled.div`
+  flex: 1;
+  background-image: url(${(props: CardImageProps) => props.src});
+  background-color: #f0f0f0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
   border-radius: 3px;
 `;
 
-export const ContentContainer = styled.div`
+export const Content = styled.div`
   padding-top: 6;
 `;
 
@@ -49,7 +59,7 @@ export const PastDateDescription = styled(DateDescription)`
   color: #ff0000;
 `;
 
-export const DateDescriptionContainer = styled.div`
+export const DateDescriptionWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   & > p {
