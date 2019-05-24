@@ -25,6 +25,7 @@ export const Card: React.FC<Props> = ({
   currentDate,
   itemId,
 }) => {
+  const isLate = endDate ? currentDate.getTime() < endDate.getTime() : false;
   return (
     <S.Card>
       <S.CardImage src={imageSrc} />
@@ -40,7 +41,7 @@ export const Card: React.FC<Props> = ({
           )}
           {endDate && (
             <S.DateDescription
-              isLate={currentDate.getTime() < endDate.getTime()}
+              isLate={isLate}
             >
               {formatDate(endDate)}
             </S.DateDescription>
