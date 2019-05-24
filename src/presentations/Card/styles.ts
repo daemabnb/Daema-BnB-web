@@ -29,11 +29,15 @@ export const Content = styled.div`
 
 const Description = styled.p`
   color: #484848;
+  margin: 0;
+  margin-top: 4px;
   font-size: 14px;
 `;
 
 export const ItemType = styled.p`
   color: #767676;
+  margin: 0;
+  margin-top: 4px;
   font-size: 12px;
   font-weight: 800;
 `;
@@ -61,6 +65,7 @@ export const PastDateDescription = styled(DateDescription)`
 
 export const DateDescriptionWrapper = styled.div`
   display: grid;
+  margin-top: 4px;
   grid-template-columns: auto auto;
   & > p {
     margin: 0;
