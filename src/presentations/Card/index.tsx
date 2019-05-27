@@ -12,7 +12,7 @@ interface Props {
   itemId: string;
   startDate?: Date;
   endDate?: Date;
-  currentDate: Date;
+  currentDate?: Date;
 }
 
 export const Card: React.FC<Props> = ({
@@ -25,7 +25,8 @@ export const Card: React.FC<Props> = ({
   currentDate,
   itemId,
 }) => {
-  const isLate = endDate ? currentDate.getTime() < endDate.getTime() : false;
+  const currentTime = currentDate ? currentDate.getTime() : Date.now();
+  const isLate = endDate ? currentTime < endDate.getTime() : false;
   return (
     <S.Card>
       <S.CardImage src={imageSrc} />
