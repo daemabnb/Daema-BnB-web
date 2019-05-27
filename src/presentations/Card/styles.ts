@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-  width: 50%;
   height: calc(30vw + 50px);
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   padding: 8px 6px 12px;
   box-sizing: border-box;
