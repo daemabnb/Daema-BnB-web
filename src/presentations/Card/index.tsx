@@ -28,7 +28,7 @@ export const Card: React.FC<Props> = ({
   const currentTime = currentDate ? currentDate.getTime() : Date.now();
   const isLate = endDate ? currentTime < endDate.getTime() : false;
   const startDateDescription = startDate && (
-    <S.DateDescription isLate={false}>
+    <S.DateDescription>
       {formatDate(startDate)}
     </S.DateDescription>
   );

@@ -51,7 +51,7 @@ export const ItemPrice = styled(Description)`
 `;
 
 interface DateProps {
-  isLate: boolean;
+  isLate?: boolean;
 }
 
 export const DateDescription = styled(Description)`
