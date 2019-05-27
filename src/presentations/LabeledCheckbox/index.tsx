@@ -2,13 +2,13 @@ import React from 'react';
 
 import * as S from './styles';
 
-interface Props {
+interface LabeledCheckboxProps {
   isChecked: boolean;
   onChange: (value: boolean) => void;
   label?: string;
 }
 
-export const LabeledCheckbox: React.FC<Props> = ({
+export const LabeledCheckbox: React.FC<LabeledCheckboxProps> = ({
   isChecked,
   onChange,
   label = '',
