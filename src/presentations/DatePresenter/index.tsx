@@ -14,7 +14,7 @@ export const DatePresenter: React.FC<DatePresenterProps> = ({
 }) => {
   return (
     <S.DatePresenter>
-      {`${formatDate(startDate)} ~ ${formatDate(endDate)}`}
+      {formatDate(startDate)} ~ {formatDate(endDate)}
     </S.DatePresenter>
   );
 };

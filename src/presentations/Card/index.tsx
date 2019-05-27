@@ -41,7 +41,7 @@ export const Card: React.FC<Props> = ({
       <S.Content>
         <S.ItemType>{isPublic ? '공용물품' : '개인물품'}</S.ItemType>
         <S.ItemName>{itemName}</S.ItemName>
-        <S.ItemPrice>{`${itemPrice}원/회`}</S.ItemPrice>
+        <S.ItemPrice>{itemPrice}원/회</S.ItemPrice>
         <S.DateDescriptionWrapper>
           {startDateDescription}
           {endDateDescription}
