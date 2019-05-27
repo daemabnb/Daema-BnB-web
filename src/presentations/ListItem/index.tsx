@@ -31,7 +31,7 @@ export const ListItem: React.FC<Props> = ({
           <S.ListItemOwner>{ownerName}</S.ListItemOwner>
         </S.ListItemDescritionLeft>
         <S.ListItemDateDescription>
-          {`${formatDate(sharedDate)} ~ ${formatDate(returnedDate)}`}
+          {formatDate(sharedDate)} ~ {formatDate(returnedDate)}
         </S.ListItemDateDescription>
       </S.ListItemDescrition>
     </S.ListItem>
