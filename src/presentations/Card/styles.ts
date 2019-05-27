@@ -1,29 +1,42 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.div`
-  width: 50%;
-  display: inline-block;
+export const Card = styled.div`
+  height: calc(30vw + 50px);
+  display: flex;
+  flex-direction: column;
   padding: 8px 6px 12px;
   box-sizing: border-box;
 `;
 
-export const CardImage = styled.img`
-  width: 100%;
-  height: 66%;
+interface CardImageProps {
+  src: string;
+}
+
+export const CardImage = styled.div`
+  flex: 1;
+  background-image: url(${(props: CardImageProps) => props.src});
+  background-color: #f0f0f0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
   border-radius: 3px;
 `;
 
-export const ContentContainer = styled.div`
+export const Content = styled.div`
   padding-top: 6;
 `;
 
 const Description = styled.p`
   color: #484848;
+  margin: 0;
+  margin-top: 4px;
   font-size: 14px;
 `;
 
 export const ItemType = styled.p`
   color: #767676;
+  margin: 0;
+  margin-top: 4px;
   font-size: 12px;
   font-weight: 800;
 `;
@@ -37,7 +50,7 @@ export const ItemPrice = styled(Description)`
 `;
 
 interface DateProps {
-  isLate: boolean;
+  isLate?: boolean;
 }
 
 export const DateDescription = styled(Description)`
@@ -49,8 +62,9 @@ export const PastDateDescription = styled(DateDescription)`
   color: #ff0000;
 `;
 
-export const DateDescriptionContainer = styled.div`
+export const DateDescriptionWrapper = styled.div`
   display: grid;
+  margin-top: 4px;
   grid-template-columns: auto auto;
   & > p {
     margin: 0;

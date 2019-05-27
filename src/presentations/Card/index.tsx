@@ -1,17 +1,6 @@
 import React from 'react';
 
-import {
-  CardContainer,
-  CardImage,
-  ContentContainer,
-  ItemType,
-  ItemName,
-  ItemPrice,
-  DateDescription,
-  DateDescriptionContainer,
-} from './styles';
-
-import { formatDate } from '../../utils/formatDate';
+import { formatDate } from '../../utils';
 
 interface Props {
   imageSrc: string;
@@ -21,7 +10,7 @@ interface Props {
   itemId: string;
   startDate?: Date;
   endDate?: Date;
-  currentDate: Date;
+  currentDate?: Date;
 }
 
 export const Card: React.FC<Props> = ({
@@ -34,26 +23,28 @@ export const Card: React.FC<Props> = ({
   currentDate,
   itemId,
 }) => {
+  const currentTime = currentDate ? currentDate.getTime() : Date.now();
+  const isLate = endDate ? currentTime < endDate.getTime() : false;
+  const startDateDescription = startDate && (
+    <S.DateDescription>
+      {formatDate(startDate)}
+    </S.DateDescription>
+  );
+  const endDateDescription = endDate && (
+    <S.DateDescription isLate={isLate}>{formatDate(endDate)}</S.DateDescription>
+  );
   return (
-    <CardContainer>
-      <CardImage src={imageSrc} />
-      <ContentContainer>
-        <ItemType>{isPublic ? '공용물품' : '개인물품'}</ItemType>
-        <ItemName>{itemName}</ItemName>
-        <ItemPrice>{`${itemPrice}원/회`}</ItemPrice>
-        <DateDescriptionContainer>
-          {startDate ? (
-            <DateDescription isLate={false}>
-              {formatDate(startDate)}
-            </DateDescription>
-          ) : null}
-          {endDate ? (
-            <DateDescription isLate={currentDate.getTime() < endDate.getTime()}>
-              {formatDate(endDate)}
-            </DateDescription>
-          ) : null}
-        </DateDescriptionContainer>
-      </ContentContainer>
-    </CardContainer>
+    <S.Card>
+      <S.CardImage src={imageSrc} />
+      <S.Content>
+        <S.ItemType>{isPublic ? '공용물품' : '개인물품'}</S.ItemType>
+        <S.ItemName>{itemName}</S.ItemName>
+        <S.ItemPrice>{itemPrice}원/회</S.ItemPrice>
+        <S.DateDescriptionWrapper>
+          {startDateDescription}
+          {endDateDescription}
+        </S.DateDescriptionWrapper>
+      </S.Content>
+    </S.Card>
   );
 };
