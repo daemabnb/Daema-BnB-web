@@ -9,7 +9,7 @@ interface Props {
   itemId: string;
   ownerName: string;
   sharedDate: Date;
-  returnDate: Date;
+  returnedDate: Date;
   onClick?: () => void;
 }
 
@@ -19,7 +19,7 @@ export const ListItem: React.FC<Props> = ({
   itemId,
   ownerName,
   sharedDate,
-  returnDate,
+  returnedDate,
   onClick,
 }) => {
   return (
@@ -31,7 +31,7 @@ export const ListItem: React.FC<Props> = ({
           <S.ListItemOwner>{ownerName}</S.ListItemOwner>
         </S.ListItemDescritionLeft>
         <S.ListItemDateDescription>
-          {`${formatDate(sharedDate)} ~ ${formatDate(returnDate)}`}
+          {`${formatDate(sharedDate)} ~ ${formatDate(returnedDate)}`}
         </S.ListItemDateDescription>
       </S.ListItemDescrition>
     </S.ListItem>
