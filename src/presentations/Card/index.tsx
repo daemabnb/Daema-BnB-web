@@ -1,5 +1,7 @@
 import React from 'react';
 
+import * as S from './styles';
+
 import { formatDate } from '../../utils';
 
 interface Props {
