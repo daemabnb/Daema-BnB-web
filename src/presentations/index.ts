@@ -3,5 +3,6 @@ export * from './LabeledNumberInput';
 export * from './LabeledPriceInput';
 export * from './LabeledDescriptionInput';
 export * from './Button';
+export * from './ListItem';
 export * from './Card';
 export * from './DatePresenter';
