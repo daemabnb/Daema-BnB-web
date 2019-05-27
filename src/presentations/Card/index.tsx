@@ -27,6 +27,14 @@ export const Card: React.FC<Props> = ({
 }) => {
   const currentTime = currentDate ? currentDate.getTime() : Date.now();
   const isLate = endDate ? currentTime < endDate.getTime() : false;
+  const startDateDescription = startDate && (
+    <S.DateDescription isLate={false}>
+      {formatDate(startDate)}
+    </S.DateDescription>
+  );
+  const endDateDescription = endDate && (
+    <S.DateDescription isLate={isLate}>{formatDate(endDate)}</S.DateDescription>
+  );
   return (
     <S.Card>
       <S.CardImage src={imageSrc} />
@@ -35,18 +43,8 @@ export const Card: React.FC<Props> = ({
         <S.ItemName>{itemName}</S.ItemName>
         <S.ItemPrice>{`${itemPrice}원/회`}</S.ItemPrice>
         <S.DateDescriptionWrapper>
-          {startDate && (
-            <S.DateDescription isLate={false}>
-              {formatDate(startDate)}
-            </S.DateDescription>
-          )}
-          {endDate && (
-            <S.DateDescription
-              isLate={isLate}
-            >
-              {formatDate(endDate)}
-            </S.DateDescription>
-          )}
+          {startDateDescription}
+          {endDateDescription}
         </S.DateDescriptionWrapper>
       </S.Content>
     </S.Card>
