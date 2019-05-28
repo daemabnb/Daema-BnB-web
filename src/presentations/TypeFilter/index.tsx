@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import * as S from './styles';
 import { FilterDropdown } from '../FilterDropdown';
@@ -11,29 +11,24 @@ interface TypeFilterProps {
   onToggleFilter: (value: boolean) => void;
 }
 
-interface TypeFilterState {}
-
-export class TypeFilter extends Component<TypeFilterProps, TypeFilterState> {
-  render() {
-    const {
-      isActive,
-      value = '타입',
-      contentItems,
-      onSelectType,
-      onToggleFilter,
-    } = this.props;
-    const isSelected = value !== '타입';
-    const dropdownItems = contentItems.map((content, i) => (
-      <S.DropdownItem key={i} onClick={onSelectType.bind(null, content)}>
-        {content}
-      </S.DropdownItem>
-    ));
-    const onClick = onToggleFilter.bind(null, !isActive);
-    return (
-      <S.TypeFilter onClick={onClick}>
-        <S.Dropdownbtn isSelected={isSelected}>{value}</S.Dropdownbtn>
-        <FilterDropdown isActive={isActive}>{dropdownItems}</FilterDropdown>
-      </S.TypeFilter>
-    );
-  }
-}
+export const TypeFilter: React.FC<TypeFilterProps> = ({
+  isActive,
+  value = '타입',
+  contentItems,
+  onSelectType,
+  onToggleFilter,
+}) => {
+  const isSelected = value !== '타입';
+  const dropdownItems = contentItems.map((content, i) => (
+    <S.DropdownItem key={i} onClick={onSelectType.bind(null, content)}>
+      {content}
+    </S.DropdownItem>
+  ));
+  const onClick = onToggleFilter.bind(null, !isActive);
+  return (
+    <S.TypeFilter onClick={onClick}>
+      <S.Dropdownbtn isSelected={isSelected}>{value}</S.Dropdownbtn>
+      <FilterDropdown isActive={isActive}>{dropdownItems}</FilterDropdown>
+    </S.TypeFilter>
+  );
+};
