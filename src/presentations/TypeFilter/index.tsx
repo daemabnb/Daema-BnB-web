@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import * as S from './styles';
+import { FilterDropdown } from '../FilterDropdown';
 
 interface TypeFilterProps {
   isActive: boolean;
@@ -31,9 +32,7 @@ export class TypeFilter extends Component<TypeFilterProps, TypeFilterState> {
     return (
       <S.TypeFilter onClick={onClick}>
         <S.Dropdownbtn isSelected={isSelected}>{value}</S.Dropdownbtn>
-        <S.DropdownContainer isActive={isActive}>
-          {dropdownItems}
-        </S.DropdownContainer>
+        <FilterDropdown isActive={isActive}>{dropdownItems}</FilterDropdown>
       </S.TypeFilter>
     );
   }
