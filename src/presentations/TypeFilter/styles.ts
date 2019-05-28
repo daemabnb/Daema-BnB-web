@@ -28,15 +28,15 @@ export const Dropdownbtn = styled.div`
   }
 `;
 
-interface DropdownContainerProps {
+interface DropdownProps {
   isActive: boolean;
 }
 
-export const DropdownContainer = styled.div`
+export const Dropdown = styled.div`
   position: absolute;
   border: 1px solid #dce0e0;
   border-radius: 4px;
-  ${({ isActive }: DropdownContainerProps) => !isActive && 'display: none;'}
+  ${({ isActive }: DropdownProps) => !isActive && 'display: none;'}
 `;
 
 export const DropdownItem = styled.div`
