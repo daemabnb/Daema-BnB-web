@@ -47,7 +47,6 @@ export class ImageUploader extends Component<
 
   handleDragLeave = (event: React.DragEvent<HTMLLabelElement>) => {
     prevent(event);
-
     this.setState({ onDraggingOver: false });
   }
 
