@@ -30,10 +30,7 @@ export const Dropdownbtn = styled.div`
 
 export const DropdownItem = styled.div`
   padding: 6px 12px;
-  border-bottom: 1px solid #dce0e0;
   white-space: nowrap;
-  font-size: 14px;
-  &:last-child {
-    border: none;
-  }
+  font-size: 16px;
+  color: #484848;
 `;
