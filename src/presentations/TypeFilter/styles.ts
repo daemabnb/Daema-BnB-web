@@ -33,4 +33,8 @@ export const DropdownItem = styled.div`
   white-space: nowrap;
   font-size: 16px;
   color: #484848;
+  cursor: pointer;
+  &:hover {
+    background: #f2f2f2;
+  }
 `;
