@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import * as S from './styles';
 import { FilterDropdown } from '../FilterDropdown';
@@ -24,9 +24,11 @@ export const TypeFilter: React.FC<TypeFilterProps> = ({
       {content}
     </S.DropdownItem>
   ));
-  const onClick = onToggleFilter.bind(null, !isActive);
+  const onClickFilter = useCallback(() => {
+    onToggleFilter(!isActive);
+  },                                [isActive]);
   return (
-    <S.TypeFilter onClick={onClick}>
+    <S.TypeFilter onClick={onClickFilter}>
       <S.Dropdownbtn isSelected={isSelected}>{value}</S.Dropdownbtn>
       <FilterDropdown isActive={isActive}>{dropdownItems}</FilterDropdown>
     </S.TypeFilter>
