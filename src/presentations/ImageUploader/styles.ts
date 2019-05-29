@@ -9,31 +9,28 @@ export const HiddenFileInput = styled.input`
   display: none;
 `;
 
-export const ImageUploadable = styled.label`
-  width: 100%;
-  cursor: pointer;
-  box-sizing: border-box;
-  display: table;
-  position: relative;
-`;
-
-interface TableCellProps {
+interface ImageUploadableProps {
   isCoverImage: boolean;
   isActive: boolean;
 }
 
-export const TableCell = styled.div`
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
+export const ImageUploadable = styled.label`
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
   border: 2px dashed rgb(187, 187, 187);
   border-radius: 6px;
 
-  ${({ isCoverImage }: TableCellProps) => css`
+  ${({ isCoverImage }: ImageUploadableProps) => css`
     height: ${isCoverImage ? '400' : '290'}px;
   `}
 
-  ${({ isActive }: TableCellProps) =>
+  ${({ isActive }: ImageUploadableProps) =>
     isActive &&
     css`
       border-color: #008489;

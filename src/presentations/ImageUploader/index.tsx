@@ -69,7 +69,7 @@ export class ImageUploader extends Component<
     const { onDelete, id, image, isCoverImage = false } = this.props;
     const { onDraggingOver } = this.state;
 
-    const tableCellChild = isCoverImage ? (
+    const imageUploadableChild = isCoverImage ? (
       <>
         <Button content="사진 업로드" />
         <S.UploadExplain>또는 사진을 드래그하세요</S.UploadExplain>
@@ -90,11 +90,11 @@ export class ImageUploader extends Component<
         onDragLeave={this.handleDragLeave}
         onDragOver={this.handleDragOver}
         onDrop={this.handleDrop}
+        isCoverImage={isCoverImage}
+        isActive={onDraggingOver}
       >
         <S.HiddenFileInput id={id} type="file" onChange={this.handleChange} />
-        <S.TableCell isCoverImage={isCoverImage} isActive={onDraggingOver}>
-          {tableCellChild}
-        </S.TableCell>
+        {imageUploadableChild}
       </S.ImageUploadable>
     );
 
