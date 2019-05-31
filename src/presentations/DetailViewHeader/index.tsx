@@ -27,7 +27,7 @@ export const DetailViewHeader: React.FC<DetailViewHeaderProps> = ({
   returnDate,
   period,
 }) => {
-  const itemType = isPublic ? '공용물품' : '개인물품';
+  const itemTypeText = isPublic ? '공용물품' : '개인물품';
   const itemPriceText = isFree ? '무료' : `₩${itemPrice}`;
   const dealDuration =
     itemDealType === 'share'
@@ -42,7 +42,7 @@ export const DetailViewHeader: React.FC<DetailViewHeaderProps> = ({
   );
   return (
     <S.DetailViewHeader>
-      <S.ItemType>{itemType}</S.ItemType>
+      <S.ItemType>{itemTypeText}</S.ItemType>
       <S.ItemName>{itemName}</S.ItemName>
       <S.ItemStatus>{itemStatus}</S.ItemStatus>
       <S.ItemPriceWithUnit>
