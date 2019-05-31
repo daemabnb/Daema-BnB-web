@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import ic_left_arrowPng from '../../assets/icon/ic_left_arrow.png';
 import ic_right_arrowPng from '../../assets/icon/ic_right_arrow.png';
@@ -65,10 +65,11 @@ interface PaginationItemProps {
 }
 
 export const PaginationItem = styled.div`
-  background: ${(props: PaginationItemProps) =>
-    props.isSelected ? '#fff' : 'rgba(255, 255,255, 0.8)'};
-  width: ${(props: PaginationItemProps) => (props.isSelected ? '8px' : '6px')};
-  height: ${(props: PaginationItemProps) => (props.isSelected ? '8px' : '6px')};
   border-radius: 3px;
   margin: 0 5px;
+  ${({ isSelected }: PaginationItemProps) => css`
+    background: ${isSelected ? '#fff' : 'rgba(255, 255,255, 0.8)'};
+    width: ${isSelected ? '8px' : '6px'};
+    height: ${isSelected ? '8px' : '6px'};
+  `}
 `;
