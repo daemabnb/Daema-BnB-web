@@ -65,7 +65,7 @@ interface PageIndicatorDotProps {
 }
 
 export const PageIndicatorDot = styled.div`
-  border-radius: 3px;
+  border-radius: 4px;
   margin: 0 5px;
   ${({ isSelected }: PageIndicatorDotProps) => css`
     background: ${isSelected ? '#fff' : 'rgba(255, 255,255, 0.8)'};
