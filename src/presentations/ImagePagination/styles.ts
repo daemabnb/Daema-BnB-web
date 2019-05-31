@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import ic_left_arrowPng from '../../assets/icon/ic_left_arrow.png';
 import ic_right_arrowPng from '../../assets/icon/ic_right_arrow.png';
 
-export const ImagePagination = styled.div`
+export const ImageCarousel = styled.div`
   background: #f0f0f0;
   width: 100%;
   height: 50vw;
@@ -50,7 +50,7 @@ export const RightArrow = styled(Arrow)`
   background-image: url(${ic_right_arrowPng});
 `;
 
-export const Pagination = styled.div`
+export const PageIndicator = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -60,14 +60,14 @@ export const Pagination = styled.div`
   padding: 8px 0;
 `;
 
-interface PaginationItemProps {
+interface PageIndicatorDotProps {
   isSelected: boolean;
 }
 
-export const PaginationItem = styled.div`
+export const PageIndicatorDot = styled.div`
   border-radius: 3px;
   margin: 0 5px;
-  ${({ isSelected }: PaginationItemProps) => css`
+  ${({ isSelected }: PageIndicatorDotProps) => css`
     background: ${isSelected ? '#fff' : 'rgba(255, 255,255, 0.8)'};
     width: ${isSelected ? '8px' : '6px'};
     height: ${isSelected ? '8px' : '6px'};

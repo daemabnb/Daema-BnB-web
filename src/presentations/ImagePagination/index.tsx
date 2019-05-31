@@ -7,10 +7,10 @@ interface Props {
   imageUrls: string[];
 }
 
-export const ImagePagination: React.FC<Props> = ({ imageUrls }) => {
+export const ImageCarousel: React.FC<Props> = ({ imageUrls }) => {
   const [selectedIndex, onChangeIndex] = useState(0);
-  const paginationItems = imageUrls.map((imageUrl, index) => (
-    <S.PaginationItem key={index} isSelected={index === selectedIndex} />
+  const pageIndicatorDots = imageUrls.map((imageUrl, index) => (
+    <S.PageIndicatorDot key={index} isSelected={index === selectedIndex} />
   ));
   const onClickLeftArrow = onChangeIndex.bind(
     null,
@@ -21,11 +21,11 @@ export const ImagePagination: React.FC<Props> = ({ imageUrls }) => {
     getNextPaginationIndex(selectedIndex, 1, imageUrls.length),
   );
   return (
-    <S.ImagePagination>
+    <S.ImageCarousel>
       <S.ImagePresenter src={imageUrls[selectedIndex]} />
       <S.LeftArrow onClick={onClickLeftArrow} />
       <S.RightArrow onClick={onClickRightArrow} />
-      <S.Pagination>{paginationItems}</S.Pagination>
-    </S.ImagePagination>
+      <S.PageIndicator>{pageIndicatorDots}</S.PageIndicator>
+    </S.ImageCarousel>
   );
 };
