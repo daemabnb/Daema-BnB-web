@@ -8,4 +8,4 @@ export * from './Divider';
 export * from './ListItem';
 export * from './Card';
 export * from './DatePresenter';
-export * from './ImagePagination';
+export * from './ImageCarousel';
