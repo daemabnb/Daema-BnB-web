@@ -14,11 +14,11 @@ export const ImageCarousel: React.FC<Props> = ({ imageUrls }) => {
   ));
   const onClickLeftArrow = onChangeIndex.bind(
     null,
-    getNextPaginationIndex(selectedIndex, -1, imageUrls.length),
+    getNextPaginationIndex(selectedIndex, 'left', imageUrls.length),
   );
   const onClickRightArrow = onChangeIndex.bind(
     null,
-    getNextPaginationIndex(selectedIndex, 1, imageUrls.length),
+    getNextPaginationIndex(selectedIndex, 'right', imageUrls.length),
   );
   return (
     <S.ImageCarousel>
