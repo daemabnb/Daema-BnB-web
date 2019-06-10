@@ -6,7 +6,7 @@ export const UserProfile = styled.div`
   align-items: center;
 `;
 
-export const UserProfileThumb = styled.div`
+export const UserProfileThumb = styled.a`
   position: relative;
 `;
 

@@ -17,17 +17,15 @@ export const UserProfile: React.FC<Props> = ({
 }) => {
   return (
     <S.UserProfile>
-      <a href={facebookUrl} target="_blank">
-        <S.UserProfileThumb>
-          <S.UserProfileImgCover>
-            <S.UserProfileImg
-              src={profileSrc}
-              alt="사용자 페이스북 프로필 사진"
-            />
-          </S.UserProfileImgCover>
-          <S.FacebookIcon src={facebookPng} alt="페이스북 로고" />
-        </S.UserProfileThumb>
-      </a>
+      <S.UserProfileThumb href={facebookUrl} target="_blank">
+        <S.UserProfileImgCover>
+          <S.UserProfileImg
+            src={profileSrc}
+            alt="사용자 페이스북 프로필 사진"
+          />
+        </S.UserProfileImgCover>
+        <S.FacebookIcon src={facebookPng} alt="페이스북 로고" />
+      </S.UserProfileThumb>
       <S.UserNameWrapper>
         <S.UserName>{name}</S.UserName>
       </S.UserNameWrapper>
