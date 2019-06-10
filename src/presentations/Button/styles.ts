@@ -11,7 +11,8 @@ export const Button = styled.div`
   display: ${(props: ButtonProps) =>
     props.size === 'big' ? 'flex' : 'inline-flex'};
   align-items: center;
-  padding: 10px 8px;
+  justify-content: center;
+  padding: 20px;
   margin-top: 12px;
   word-break: keep-all;
   text-align: center;
