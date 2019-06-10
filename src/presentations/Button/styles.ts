@@ -9,8 +9,11 @@ export const Button = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   display: ${(props: ButtonProps) =>
-    props.size === 'big' ? 'block' : 'inline-block'};
+    props.size === 'big' ? 'flex' : 'inline-flex'};
+  align-items: center;
   padding: 10px 8px;
+  margin-top: 12px;
+  word-break: keep-all;
   text-align: center;
   font-size: 16px;
   font-weight: 800;
