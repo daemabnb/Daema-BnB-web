@@ -15,8 +15,8 @@ class App extends React.Component<Props, State> {
     return (
       <Router history={history}>
         <Switch>
-          <Route path="/" component={Signup} />
-          <Route path="/signin" component={Signin} />
+          <Route exact path="/" component={Signup} />
+          <Route exact path="/signin" component={Signin} />
         </Switch>
       </Router>
     );
