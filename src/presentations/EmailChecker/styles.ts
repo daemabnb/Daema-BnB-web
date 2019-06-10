@@ -2,6 +2,6 @@ import styled from 'styled-components';
 
 export const EmailChecker = styled.div`
   display: grid;
-  grid-template-columns: auto 112px;
-  grid-gap: 1em;
+  grid-template-columns: auto 9em;
+  grid-gap: 0.5em;
 `;
