@@ -8,6 +8,7 @@
     "react": "^16.8.6",
     "react-dates": "^20.2.2",
     "react-dom": "^16.8.6",
+    "react-facebook-login": "^4.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "styled-components": "^4.2.0"
@@ -40,6 +41,7 @@
     "@types/react": "16.8.17",
     "@types/react-dates": "^17.1.5",
     "@types/react-dom": "16.8.4",
+    "@types/react-facebook-login": "^4.1.0",
     "@types/react-router-dom": "^4.3.3",
     "@types/styled-components": "^4.1.15",
     "tslint": "^5.16.0",
