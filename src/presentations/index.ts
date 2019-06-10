@@ -16,3 +16,4 @@ export * from './DropdownButton';
 export * from './TypeFilterDropdownButton';
 export * from './DateRangeFilterDropdownButton';
 export * from './DetailViewHeader';
+export * from './EmailChecker';
