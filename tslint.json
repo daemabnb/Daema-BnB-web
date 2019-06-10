@@ -8,6 +8,7 @@
       "check-format",
       "allow-pascal-case"
     ],
-    "ter-arrow-parens": [true, "as-needed"]
+    "ter-arrow-parens": [true, "as-needed"],
+    "jsx-boolean-value": false
   }
 }
