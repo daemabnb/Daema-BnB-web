@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import plusPng from '../assets/plus.png';
 
 export const ImageUploader = styled.div`
-  margin-bottom: 30px;
+  margin-top: 12px;
 `;
 
 export const HiddenFileInput = styled.input`
