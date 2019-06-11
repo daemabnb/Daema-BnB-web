@@ -9,8 +9,10 @@
     "react-dates": "^20.2.2",
     "react-dom": "^16.8.6",
     "react-facebook-login": "^4.1.1",
+    "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "redux": "^4.0.1",
     "styled-components": "^4.2.0"
   },
   "scripts": {
@@ -42,6 +44,7 @@
     "@types/react-dates": "^17.1.5",
     "@types/react-dom": "16.8.4",
     "@types/react-facebook-login": "^4.1.0",
+    "@types/react-redux": "^7.0.9",
     "@types/react-router-dom": "^4.3.3",
     "@types/styled-components": "^4.1.15",
     "tslint": "^5.16.0",
