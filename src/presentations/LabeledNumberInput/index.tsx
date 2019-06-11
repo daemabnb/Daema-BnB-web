@@ -25,7 +25,7 @@ export class LabeledNumberInput extends Component<LabeledNumberInputProps> {
       <LabeledTextInput
         className={className}
         onChange={this.handleChange}
-        value={value.toString()}
+        value={value === 0 ? '' : value.toString()}
         label={label}
         placeholder={placeholder}
       />
