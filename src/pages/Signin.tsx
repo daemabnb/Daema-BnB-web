@@ -1,14 +1,31 @@
 import React from 'react';
 
 import FacebookLogin from 'react-facebook-login';
-// import { signin } from '../lib/user';
+import { signin } from '../lib/user';
+import { setCookie } from '../utils';
 
-interface Props {
+interface Props {}
+
+interface FacebookLoginResponse {
+  accessToken: string;
+  data_access_expiration_time: number;
+  expiresIn: number;
+  id: string;
+  name: string;
+  reauthorize_required_in: number;
+  signedRequest: string;
+  userID: string;
 }
 
-export const Signin: React.FC = () => {
-  const responseFacebook = (response: any) => {
-    console.log(response);
+export const Signin: React.FC<Props> = () => {
+  const responseFacebook = (response: FacebookLoginResponse) => {
+    try {
+      signin(response.accessToken).then(res => {
+        setCookie({ name: 'accessToken', value: res.data.accessToken }, 1);
+      });
+    } catch (e) {
+      alert('로그인할 수 없습니다.');
+    }
   };
 
   return (
