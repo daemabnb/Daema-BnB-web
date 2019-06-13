@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-const baseUrl = 'https://52.79.121.254/user';
+import basedApi from './basedApi';
 
 export const authMail = (email: string, token: string) =>
-  axios.post(
-    `${baseUrl}/authemail`,
+  basedApi.post(
+    'authemail',
     {
       email,
     },
@@ -16,8 +15,8 @@ export const authMail = (email: string, token: string) =>
   );
 
 export const signup = (email: string, authNum: string, token: string) =>
-  axios.post(
-    `${baseUrl}/signup`,
+  basedApi.post(
+    'signup',
     {
       email,
       authNum,
@@ -30,4 +29,4 @@ export const signup = (email: string, authNum: string, token: string) =>
   );
 
 export const signin = (token: string) =>
-  axios.post(`${baseUrl}/signin/facebook`, { accessToken: token });
+  basedApi.post('signin/facebook', { accessToken: token });
