@@ -37,7 +37,7 @@ export const Signin: React.FC<Props> = ({ history }) => {
     <S.Signin>
       <FacebookLogin
         appId="856575621215696"
-        autoLoad={true}
+        autoLoad={false}
         callback={responseFacebook}
       />
     </S.Signin>
