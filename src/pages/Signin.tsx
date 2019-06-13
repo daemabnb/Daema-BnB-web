@@ -21,7 +21,7 @@ export const Signin: React.FC<Props> = () => {
   const responseFacebook = (response: FacebookLoginResponse) => {
     try {
       signin(response.accessToken).then(res => {
-        setCookie({ name: 'accessToken', value: res.data.accessToken }, 1);
+        setCookie({ name: 'token', value: res.data.token }, 1);
       });
     } catch (e) {
       alert('로그인할 수 없습니다.');
