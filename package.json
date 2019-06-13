@@ -41,6 +41,7 @@
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.3",
     "@types/styled-components": "^4.1.15",
+    "ts-keycode-enum": "^1.0.6",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-react": "^4.0.0",
