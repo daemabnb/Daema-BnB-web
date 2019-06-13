@@ -17,6 +17,7 @@ interface Props {
   price: number;
   date: Moment | null;
   period: number;
+  isPublic: boolean;
   RegisterActions: typeof registerActions;
 }
 
@@ -34,12 +35,26 @@ class RegisterShareItemPeriodContainer extends React.Component<Props> {
     RegisterActions.deleteRegistration();
   }
   render() {
-    const { date, period, history } = this.props;
+    const {
+      history,
+      name,
+      images,
+      explanation,
+      price,
+      date,
+      period,
+      isPublic,
+    } = this.props;
     return (
       <RegisterShareItemPeriod
         history={history}
+        name={name}
+        images={images}
+        explanation={explanation}
+        price={price}
         date={date}
         period={period}
+        isPublic={isPublic}
         changeDate={this.onChangeDate}
         changePeriod={this.onChangePeriod}
         deleteRegistration={this.onDeleteRegistration}
@@ -50,10 +65,23 @@ class RegisterShareItemPeriodContainer extends React.Component<Props> {
 
 export default connect(
   ({ registration }: StoreState) => {
-    const { date, period } = registration;
-    return {
+    const {
+      name,
+      images,
+      explanation,
+      price,
       date,
       period,
+      isPublic,
+    } = registration;
+    return {
+      name,
+      images,
+      explanation,
+      price,
+      date,
+      period,
+      isPublic,
     };
   },
   (dispatch: any) => ({
