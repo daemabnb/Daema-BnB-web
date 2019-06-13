@@ -22,28 +22,32 @@ export const Signup: React.FC<Props> = ({ history }) => {
   };
   checkToken();
   const onAuthEmail = () => {
+    checkToken();
     if (token) {
       authMail(email, token)
         .then(res => {
-          setEmailSended(true);
+          if (res.status === 201) {
+            setEmailSended(true);
+          }
         })
         .catch(e => {
           console.log(e);
         });
     }
-    checkToken();
   };
   const onSignup = () => {
+    checkToken();
     if (token) {
       signup(email, validation, token)
         .then(res => {
-          history.push('/');
+          if (res.status === 201) {
+            history.push('/');
+          }
         })
         .catch(e => {
           console.log(e);
         });
     }
-    checkToken();
   };
   return (
     <div>
