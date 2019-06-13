@@ -1,8 +1,9 @@
 import React from 'react';
 
 import FacebookLogin from 'react-facebook-login';
-import { signin } from '../lib/user';
-import { setCookie } from '../utils';
+import { signin } from '../../lib/user';
+import { setCookie } from '../../utils';
+import * as S from './styles';
 
 interface Props {}
 
@@ -29,12 +30,12 @@ export const Signin: React.FC<Props> = () => {
   };
 
   return (
-    <div>
+    <S.Signin>
       <FacebookLogin
         appId="856575621215696"
         autoLoad={true}
         callback={responseFacebook}
       />
-    </div>
+    </S.Signin>
   );
 };
