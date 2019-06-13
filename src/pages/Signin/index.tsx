@@ -22,18 +22,19 @@ interface FacebookLoginResponse {
 
 export const Signin: React.FC<Props> = ({ history }) => {
   const responseFacebook = (response: FacebookLoginResponse) => {
-    try {
-      signin(response.accessToken).then(res => {
-        setSessionStorage('token', res.data.token);
-        if (res.status === 201) {
-          history.push('/signup');
-        } else {
-          history.push('/');
-        }
-      });
-    } catch (e) {
-      alert('로그인할 수 없습니다.');
-    }
+    signin(response.accessToken).then(res => {
+      setSessionStorage('token', res.data.token);
+      if (res.status === 201) {
+        history.push('/signup');
+      } else {
+        history.push('/');
+      }
+    })
+    .catch(e => {
+      if (e.response.status === 405) {
+        alert('로그인에 실패했습니다.');
+      }
+    });
   };
   const appId: string = process.env.REACT_APP_FACEBOOK_APP_ID || '';
 
