@@ -11,7 +11,7 @@ interface TypeFilterDropdownButtonState {
 }
 
 type ActionType = {
-  type: 'set personal' | 'set public';
+  type: 'set personal' | 'set public' | 'reset';
 };
 
 const reducer = (
@@ -23,6 +23,8 @@ const reducer = (
       return { type: '개인' };
     case 'set public':
       return { type: '공용' };
+    case 'reset':
+      return { type: null };
   }
 };
 
@@ -34,15 +36,18 @@ export const TypeFilterDropdownButton: FC<TypeFilterDropdownButtonProps> = ({
   });
 
   const handleClickPersonal = useCallback(() => {
-    dispatch({ type: 'set personal' });
-  },                                      []);
+    if (state.type === '개인') dispatch({ type: 'reset' });
+    else dispatch({ type: 'set personal' });
+  },                                      [state]);
   const handleClickPublic = useCallback(() => {
-    dispatch({ type: 'set public' });
-  },                                    []);
+    if (state.type === '공용') dispatch({ type: 'reset' });
+    else dispatch({ type: 'set public' });
+  },                                    [state]);
 
   return (
     <DropdownButton
-      buttonText={state.type || '종류'}
+      defaultButtonText="종류"
+      value={state.type}
       onClose={onApply.bind(undefined, state.type)}
     >
       <S.TypeButton

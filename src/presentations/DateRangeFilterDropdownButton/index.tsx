@@ -59,7 +59,7 @@ export class DateRangeFilterDropdownButton extends Component<
       }
       return `${startDateString} ~ ${endDateString}`;
     }
-    return '날짜';
+    return null;
   }
 
   render() {
@@ -68,7 +68,8 @@ export class DateRangeFilterDropdownButton extends Component<
 
     return (
       <DropdownButton
-        buttonText={this.datesString}
+        defaultButtonText="날짜"
+        value={this.datesString}
         onClose={onApply.bind(null, { startDate, endDate })}
       >
         <DayPickerRangeController

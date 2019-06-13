@@ -7,17 +7,13 @@ interface DropdownButtonCover {
 export const DropdownButtonCover = styled.div`
   width: fit-content;
   position: relative;
+  margin: 0 4px;
+
+  &:first-child {
+    margin-left: 0px;
+  }
 
   ${({ isActive }: DropdownButtonCover) => css`
-    ${DropdownButton} {
-      border-color: ${isActive ? '#008489' : '#dce0e0'};
-      background: ${isActive ? '#008489' : '#fff'};
-      color: ${isActive ? '#fff' : '#484848'};
-      &:hover {
-        background: ${isActive ? '#006c70' : '#f2f2f2'};
-        border-color: ${isActive ? '#006c70' : '#f2f2f2'};
-      }
-    }
     ${Dropdown} {
       ${!isActive &&
         css`
@@ -27,13 +23,38 @@ export const DropdownButtonCover = styled.div`
   `}
 `;
 
-export const DropdownButton = styled.div`
+interface DropdownButtonProps {
+  hasValue: boolean;
+  isActive: boolean;
+}
+
+export const DropdownButton = styled.div<DropdownButtonProps>`
   border-radius: 4px;
   border: 1px solid;
   padding: 6px 12px;
   font-size: 14px;
   cursor: pointer;
   user-select: none;
+
+  border-color: #dce0e0;
+  background: #fff;
+  color: #484848;
+  &:hover {
+    background: #f2f2f2;
+    border-color: #f2f2f2;
+  }
+
+  ${({ hasValue, isActive }) =>
+    (hasValue || isActive) &&
+    css`
+      border-color: #008489;
+      background: #008489;
+      color: #fff;
+      &:hover {
+        background: #006c70;
+        border-color: #006c70;
+      }
+    `}
 `;
 
 export const Dropdown = styled.div`

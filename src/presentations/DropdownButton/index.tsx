@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import * as S from './styles';
 
 interface DropdownButtonProps {
-  buttonText: string;
+  defaultButtonText: string;
+  value: string | null;
   onClose: () => void;
 }
 
@@ -31,13 +32,17 @@ export class DropdownButton extends Component<
   }
 
   render() {
-    const { buttonText, children } = this.props;
+    const { value, defaultButtonText, children } = this.props;
     const { isActive } = this.state;
 
     return (
       <S.DropdownButtonCover isActive={isActive}>
-        <S.DropdownButton onClick={this.handleClickButton}>
-          {buttonText}
+        <S.DropdownButton
+          onClick={this.handleClickButton}
+          hasValue={value !== null}
+          isActive={isActive}
+        >
+          {value || defaultButtonText}
         </S.DropdownButton>
         <S.Dropdown>{children}</S.Dropdown>
       </S.DropdownButtonCover>
