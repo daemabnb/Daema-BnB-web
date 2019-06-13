@@ -1,5 +1,4 @@
 import React from 'react';
-
 import FacebookLogin from 'react-facebook-login';
 import { signin } from '../../lib/user';
 import { setSessionStorage } from '../../lib';
