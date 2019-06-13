@@ -9,6 +9,7 @@ export interface RegistrationState {
   price: number;
   date: Moment | null;
   period: number;
+  isPublic: boolean;
 }
 
 export const DELETE_REGISTRATION = 'register/DELETE_REGISTRATION';
@@ -19,6 +20,7 @@ export const CHANGE_EXPLANATION = 'register/CHANGE_EXPLANATION';
 export const CHANGE_PRICE = 'register/CHANGE_PRICE';
 export const CHANGE_DATE = 'register/CHANGE_DATE';
 export const CHANGE_PERIOD = 'register/CHANGE_PERIOD';
+export const CHANGE_IS_PUBLIC = 'registser/CHANGE_IS_PUBLIC';
 
 interface DeleteRegistrationAction {
   type: typeof DELETE_REGISTRATION;
@@ -60,6 +62,11 @@ interface ChangePeriodAction {
   period: number;
 }
 
+interface ChangeIsPublicAction {
+  type: typeof CHANGE_IS_PUBLIC;
+  isPublic: boolean;
+}
+
 export type RegistrationActionTypes =
   | DeleteRegistrationAction
   | ChangeNameAction
@@ -68,7 +75,8 @@ export type RegistrationActionTypes =
   | ChangeExplanationAction
   | ChangePriceAction
   | ChangeDateAction
-  | ChangePeriodAction;
+  | ChangePeriodAction
+  | ChangeIsPublicAction;
 
 function deleteRegistration() {
   return {
@@ -126,6 +134,13 @@ function changePeriod(period: number) {
   };
 }
 
+function changeIsPublic(isPublic: boolean) {
+  return {
+    type: CHANGE_IS_PUBLIC,
+    isPublic,
+  };
+}
+
 export const actionCreators = {
   deleteRegistration,
   changeName,
@@ -135,6 +150,7 @@ export const actionCreators = {
   changePrice,
   changeDate,
   changePeriod,
+  changeIsPublic,
 };
 
 const initialState: RegistrationState = {
@@ -144,6 +160,7 @@ const initialState: RegistrationState = {
   price: 0,
   date: null,
   period: 0,
+  isPublic: false,
 };
 
 export function registerReducer(
@@ -191,6 +208,11 @@ export function registerReducer(
       return {
         ...state,
         period: action.period,
+      };
+    case 'registser/CHANGE_IS_PUBLIC':
+      return {
+        ...state,
+        isPublic: action.isPublic,
       };
     default:
       return state;
