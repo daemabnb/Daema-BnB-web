@@ -18,6 +18,10 @@ interface State {}
 
 const history = createBrowserHistory();
 const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+
   div, input {
     box-sizing: border-box;
   }
@@ -31,7 +35,7 @@ class App extends React.Component<Props, State> {
         <Router history={history}>
           <GlobalStyle />
           <Switch>
-            <Route exact path="/" component={Signup} />
+            <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Signin} />
             <Route
               exact

@@ -1,14 +1,35 @@
-import axios from 'axios';
+import basedApi from './basedApi';
 
-const baseUrl = 'https://52.79.121.254/user';
+export const authMail = (email: string, token: string) =>
+  basedApi.post(
+    'user/authemail',
+    {
+      email,
+    },
+    {
+      headers: {
+        token,
+      },
+    },
+  );
 
-export const authMail = (email: string) => axios.post(`${baseUrl}/authmail`, {
-  email,
-});
+export const signup = (email: string, authNum: string, token: string) =>
+  basedApi.post(
+    'user/signup',
+    {
+      email,
+      authNum,
+    },
+    {
+      headers: {
+        token,
+      },
+    },
+  );
 
-export const signup = (email: string, authNum: string) => axios.post(`${baseUrl}/signup`, {
-  email,
-  authNum,
-});
-
-export const signin = () => axios.get(`${baseUrl}/signin/facebook`);
+interface SigninResponse {
+  isAdmin: boolean;
+  token: string;
+}
+export const signin = (token: string) =>
+  basedApi.post<SigninResponse>('user/signin/facebook', { accessToken: token });

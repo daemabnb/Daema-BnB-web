@@ -10,6 +10,7 @@
     ],
     "ter-arrow-parens": [true, "as-needed"],
     "jsx-boolean-value": false,
-    "object-shorthand-properties-first": false
+    "object-shorthand-properties-first": false,
+    "no-increment-decrement": false
   }
 }
