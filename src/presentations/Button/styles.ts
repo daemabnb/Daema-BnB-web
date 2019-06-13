@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonProps {
   size: 'big' | 'small';
+  disabled: boolean;
 }
 
 export const Button = styled.div`
@@ -19,5 +20,7 @@ export const Button = styled.div`
   font-size: 16px;
   font-weight: 800;
   color: #fff;
-  background-color: #008489;
+  ${(props: ButtonProps) => css`
+    background: ${props.disabled ? '#006468' : '#008489'}
+  `}
 `;
