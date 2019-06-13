@@ -28,5 +28,9 @@ export const signup = (email: string, authNum: string, token: string) =>
     },
   );
 
+interface SigninResponse {
+  isAdmin: boolean;
+  token: string;
+}
 export const signin = (token: string) =>
-  basedApi.post('signin/facebook', { accessToken: token });
+  basedApi.post<SigninResponse>('signin/facebook', { accessToken: token });
