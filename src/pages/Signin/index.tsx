@@ -4,8 +4,11 @@ import FacebookLogin from 'react-facebook-login';
 import { signin } from '../../lib/user';
 import { setCookie } from '../../utils';
 import * as S from './styles';
+import { History } from 'history';
 
-interface Props {}
+interface Props {
+  history: History;
+}
 
 interface FacebookLoginResponse {
   accessToken: string;
@@ -18,11 +21,12 @@ interface FacebookLoginResponse {
   userID: string;
 }
 
-export const Signin: React.FC<Props> = () => {
+export const Signin: React.FC<Props> = ({ history }) => {
   const responseFacebook = (response: FacebookLoginResponse) => {
     try {
       signin(response.accessToken).then(res => {
         setCookie({ name: 'token', value: res.data.token }, 1);
+        history.push('/signup');
       });
     } catch (e) {
       alert('로그인할 수 없습니다.');
