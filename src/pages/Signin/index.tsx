@@ -26,7 +26,11 @@ export const Signin: React.FC<Props> = ({ history }) => {
     try {
       signin(response.accessToken).then(res => {
         setCookie({ name: 'token', value: res.data.token }, 1);
-        history.push('/signup');
+        if (res.status === 201) {
+          history.push('/signup');
+        } else {
+          history.push('/');
+        }
       });
     } catch (e) {
       alert('로그인할 수 없습니다.');
