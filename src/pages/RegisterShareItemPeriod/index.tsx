@@ -6,20 +6,33 @@ import { Moment } from 'moment';
 import { Button, LabeledNumberInput } from '../../presentations';
 import * as S from './styles';
 import { History } from 'history';
+import { registerShareItem } from '../../lib';
+import { getSessionStorage } from '../../lib/sessionStorage';
 
+type FileData = File | undefined;
 interface Props {
   history: History;
+  name: string;
+  images: FileData[];
+  explanation: string;
+  price: number;
   date: Moment | null;
   period: number;
+  isPublic: boolean;
   changeDate(date: Moment | null): void;
   changePeriod(period: number): void;
-  deleteRegistration():void;
+  deleteRegistration(): void;
 }
 
 export const RegisterShareItemPeriod: React.FC<Props> = ({
   history,
+  name,
+  images,
+  explanation,
+  price,
   date,
   period,
+  isPublic,
   changeDate,
   changePeriod,
   deleteRegistration,
@@ -34,6 +47,26 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
   const handleNextPage = () => {
     history.push('/');
     deleteRegistration();
+  };
+  const onRegisterShareItem = () => {
+    const token: string = getSessionStorage('token') || '';
+    const imageNames = images.map(image => (image ? image.name : ''));
+    const deadline = date ? date.valueOf() : 0;
+    registerShareItem(
+      name,
+      imageNames,
+      explanation,
+      price,
+      deadline,
+      period,
+      isPublic,
+      token,
+    ).then(res => {
+      if (res.status === 201) {
+        alert('성공');
+        handleNextPage();
+      }
+    });
   };
 
   return (
@@ -59,75 +92,8 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
       />
       <S.ButtonWrapper>
         <Button content="뒤로 가기" onClick={handlePrevPage} />
-        <Button content="완료" onClick={handleNextPage} />
+        <Button content="완료" onClick={onRegisterShareItem} />
       </S.ButtonWrapper>
     </div>
   );
 };
-
-// export class RegisterShareItemPeriod extends Component<Props, State> {
-//   constructor(props: Props) {
-//     super(props);
-//     this.state = {
-//       date: null,
-//       focused: false,
-//       period: 0,
-//     };
-//   }
-
-//   private handleDateChange = (date: Moment | null) => {
-//     this.setState({
-//       date,
-//     });
-//   }
-
-//   private handleFocusChange = ({ focused }: { focused: boolean | null }) => {
-//     this.setState({
-//       focused: focused === null ? false : focused,
-//     });
-//   }
-
-//   private handlePeriodChange = (period: number) => {
-//     this.setState({
-//       period,
-//     });
-//   }
-
-//   private handlePrevPage = () => {
-//     this.props.history.push('/register/share/item');
-//   }
-
-//   private handleNextPage = () => {
-//     this.props.history.push('/');
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <p>제한 날짜</p>
-//         <SingleDatePicker
-//           date={this.state.date}
-//           onDateChange={this.handleDateChange}
-//           focused={this.state.focused}
-//           onFocusChange={this.handleFocusChange}
-//           id="12344"
-//           numberOfMonths={1}
-//           small={false}
-//           block={true}
-//           orientation="horizontal"
-//           hideKeyboardShortcutsPanel={true}
-//           placeholder="공유마감기한"
-//         />
-//         <LabeledNumberInput
-//           onChange={this.handlePeriodChange}
-//           value={this.state.period}
-//           placeholder="공유기간 (일)"
-//         />
-//         <S.ButtonWrapper>
-//           <Button content="뒤로 가기" onClick={this.handlePrevPage} />
-//           <Button content="완료" onClick={this.handleNextPage} />
-//         </S.ButtonWrapper>
-//       </div>
-//     );
-//   }
-// }
