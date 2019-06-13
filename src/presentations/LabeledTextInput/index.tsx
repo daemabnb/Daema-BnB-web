@@ -23,10 +23,10 @@ export class LabeledTextInput extends Component<LabeledTextInputProps> {
 
   render() {
     const { className, value, label, placeholder, type, disabled = false } = this.props;
-    const Label = label && <S.Label>{label}</S.Label>;
+    const conditionalLabel = label && <S.Label>{label}</S.Label>;
     return (
       <S.LabeledTextInput>
-        {Label}
+        {conditionalLabel}
         <S.TextInput
           className={className}
           onChange={this.handleChange}
