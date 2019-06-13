@@ -1,9 +1,8 @@
-import axios from 'axios';
 import basedApi from './basedApi';
 
 export const authMail = (email: string, token: string) =>
   basedApi.post(
-    'authemail',
+    'user/authemail',
     {
       email,
     },
@@ -16,7 +15,7 @@ export const authMail = (email: string, token: string) =>
 
 export const signup = (email: string, authNum: string, token: string) =>
   basedApi.post(
-    'signup',
+    'user/signup',
     {
       email,
       authNum,
@@ -33,4 +32,4 @@ interface SigninResponse {
   token: string;
 }
 export const signin = (token: string) =>
-  basedApi.post<SigninResponse>('signin/facebook', { accessToken: token });
+  basedApi.post<SigninResponse>('user/signin/facebook', { accessToken: token });
