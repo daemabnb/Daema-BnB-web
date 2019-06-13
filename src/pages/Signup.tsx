@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import { EmailChecker, LabeledTextInput, Button } from '../presentations';
+import { History } from 'history';
 
 interface Props {
-  onSignup: () => void;
+  history: History;
 }
 
-export const Signup: React.FC = () => {
+export const Signup: React.FC<Props> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [validation, setValidation] = useState('');
   return (
