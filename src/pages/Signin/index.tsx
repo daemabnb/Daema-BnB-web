@@ -2,7 +2,7 @@ import React from 'react';
 
 import FacebookLogin from 'react-facebook-login';
 import { signin } from '../../lib/user';
-import { setCookie } from '../../utils';
+import { setSessionStorage } from '../../lib';
 import * as S from './styles';
 import { History } from 'history';
 
@@ -25,7 +25,7 @@ export const Signin: React.FC<Props> = ({ history }) => {
   const responseFacebook = (response: FacebookLoginResponse) => {
     try {
       signin(response.accessToken).then(res => {
-        setCookie({ name: 'token', value: res.data.token }, 1);
+        setSessionStorage('token', res.data.token);
         if (res.status === 201) {
           history.push('/signup');
         } else {
@@ -36,11 +36,12 @@ export const Signin: React.FC<Props> = ({ history }) => {
       alert('로그인할 수 없습니다.');
     }
   };
+  const appId: string = process.env.REACT_APP_FACEBOOK_APP_ID || '';
 
   return (
     <S.Signin>
       <FacebookLogin
-        appId="856575621215696"
+        appId={appId}
         autoLoad={false}
         callback={responseFacebook}
       />
