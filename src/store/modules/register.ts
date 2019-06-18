@@ -1,10 +1,8 @@
 import { Moment } from 'moment';
 
-type FileData = File | undefined;
-
 export interface RegistrationState {
   name: string;
-  images: FileData[];
+  images: File[];
   explanation: string;
   price: number;
   date: Moment | null;

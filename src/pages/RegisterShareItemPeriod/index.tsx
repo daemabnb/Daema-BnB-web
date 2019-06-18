@@ -6,14 +6,13 @@ import { Moment } from 'moment';
 import { Button, LabeledNumberInput } from '../../presentations';
 import * as S from './styles';
 import { History } from 'history';
-import { registerShareItem } from '../../lib';
+import { registerShareItem, modifyItemImage } from '../../lib';
 import { getSessionStorage } from '../../lib/sessionStorage';
 
-type FileData = File | undefined;
 interface Props {
   history: History;
   name: string;
-  images: FileData[];
+  images: File[];
   explanation: string;
   price: number;
   date: Moment | null;
@@ -63,7 +62,6 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
       token,
     ).then(res => {
       if (res.status === 201) {
-        alert('성공');
         handleNextPage();
       }
     });

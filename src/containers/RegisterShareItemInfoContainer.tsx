@@ -7,12 +7,10 @@ import { actionCreators as registerActions } from '../store/modules/register';
 import { bindActionCreators } from 'redux';
 import { History } from 'history';
 
-type FileData = File | undefined;
-
 interface Props {
   history: History;
   name: string;
-  images: FileData[];
+  images: File[];
   explanation: string;
   price: number;
   date: Moment | null;
