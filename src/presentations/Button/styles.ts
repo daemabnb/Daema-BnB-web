@@ -9,8 +9,6 @@ export const Button = styled.div`
   min-width: 112px;
   box-sizing: border-box;
   border-radius: 4px;
-  display: ${(props: ButtonProps) =>
-    props.size === 'big' ? 'flex' : 'inline-flex'};
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -22,5 +20,7 @@ export const Button = styled.div`
   color: #fff;
   ${(props: ButtonProps) => css`
     background: ${props.disabled ? '#006468' : '#008489'}
+    display: ${props.size === 'big' ? 'flex' : 'inline-flex'}
+    width: ${props.size === 'big' && '100%'}
   `}
 `;
