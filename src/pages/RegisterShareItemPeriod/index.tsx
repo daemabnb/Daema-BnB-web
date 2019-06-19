@@ -62,6 +62,13 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
       token,
     ).then(res => {
       if (res.status === 201) {
+        try {
+          res.data.urls.forEach((url, i) => {
+            modifyItemImage(url, images[i]);
+          });
+        } catch (e) {
+          console.log(e);
+        }
         handleNextPage();
       }
     });
