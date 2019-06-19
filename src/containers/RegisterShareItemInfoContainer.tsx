@@ -1,5 +1,4 @@
 import React from 'react';
-import { Moment } from 'moment';
 import { RegisterShareItemInfo } from '../pages';
 import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
@@ -13,8 +12,6 @@ interface Props {
   images: File[];
   explanation: string;
   price: number;
-  date: Moment | null;
-  period: number;
   RegisterActions: typeof registerActions;
 }
 
