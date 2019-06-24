@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { signin } from '../../lib/user';
-import { setSessionStorage } from '../../lib';
+import { setLocalStorageItem } from '../../lib';
 import * as S from './styles';
 import { History } from 'history';
 
@@ -23,7 +23,7 @@ interface FacebookLoginResponse {
 export const Signin: React.FC<Props> = ({ history }) => {
   const responseFacebook = (response: FacebookLoginResponse) => {
     signin(response.accessToken).then(res => {
-      setSessionStorage('token', res.data.token);
+      setLocalStorageItem('token', res.data.token);
       if (res.status === 201) {
         history.push('/signup');
       } else {

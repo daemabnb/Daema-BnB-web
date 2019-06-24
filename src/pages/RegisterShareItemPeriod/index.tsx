@@ -7,7 +7,7 @@ import { Button, LabeledNumberInput } from '../../presentations';
 import * as S from './styles';
 import { History } from 'history';
 import { registerShareItem, modifyItemImage } from '../../lib';
-import { getSessionStorage } from '../../lib/sessionStorage';
+import { getLocalStorageItem } from '../../lib/localStorage';
 
 interface Props {
   history: History;
@@ -48,7 +48,7 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
     deleteRegistration();
   };
   const onRegisterShareItem = () => {
-    const token: string = getSessionStorage('token') || '';
+    const token: string = getLocalStorageItem('token') || '';
     const imageNames = images.map(image => (image ? image.name : ''));
     const deadline = date ? date.valueOf() : 0;
     registerShareItem(
