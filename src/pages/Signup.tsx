@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { EmailChecker, LabeledTextInput, Button } from '../presentations';
 import { authMail, signup } from '../lib/user';
-import { getSessionStorage } from '../lib';
+import { getLocalStorageItem } from '../lib';
 import { History } from 'history';
 
 interface Props {
@@ -13,7 +13,7 @@ export const Signup: React.FC<Props> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [validation, setValidation] = useState('');
   const [emailSended, setEmailSended] = useState(false);
-  const token = getSessionStorage('token');
+  const token = getLocalStorageItem('token');
   const checkToken = () => {
     if (!token) {
       alert('facebook 로그인이 필요합니다.');
