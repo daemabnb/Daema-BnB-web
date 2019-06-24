@@ -10,6 +10,7 @@ import { Signup, Signin } from './pages';
 import {
   RegisterShareItemInfoContainer,
   RegisterShareItemPeriodContainer,
+  RegisterSaleItemInfoContainer,
 } from './containers';
 
 interface Props {}
@@ -46,6 +47,11 @@ class App extends React.Component<Props, State> {
               exact
               path="/register/share/period"
               component={RegisterShareItemPeriodContainer}
+            />
+            <Route
+              exact
+              path="/register/sale/item"
+              component={RegisterSaleItemInfoContainer}
             />
           </Switch>
         </Router>

@@ -4,3 +4,6 @@ export {
 export {
   default as RegisterShareItemPeriodContainer,
 } from './RegisterShareItemPeriodContainer';
+export {
+  default as RegisterSaleItemInfoContainer,
+} from './RegisterSaleItemInfoContainer';
