@@ -75,7 +75,7 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
   };
 
   return (
-    <div>
+    <S.RegisterShareItemPeriod>
       <p>제한 날짜</p>
       <SingleDatePicker
         date={date}
@@ -99,6 +99,6 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
         <Button content="뒤로 가기" onClick={handlePrevPage} />
         <Button content="완료" onClick={onRegisterShareItem} />
       </S.ButtonWrapper>
-    </div>
+    </S.RegisterShareItemPeriod>
   );
 };

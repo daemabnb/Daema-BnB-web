@@ -48,7 +48,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
     />
   ));
   return (
-    <div>
+    <S.RegisterShareItemInfo>
       <LabeledTextInput
         value={name}
         onChange={changeName}
@@ -77,6 +77,6 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
       <S.ButtonWrapper>
         <Button content="다음" onClick={handleNextPage} />
       </S.ButtonWrapper>
-    </div>
+    </S.RegisterShareItemInfo>
   );
 };
