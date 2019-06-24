@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const LabeledCheckbox = styled.div`
   display: flex;
+  margin-top: 12px;
 `;
 
 export const Checkbox = styled.input.attrs({
