@@ -1,10 +1,13 @@
 import styled, { css } from 'styled-components';
+import logoPng from '../assets/logo.png';
+import down_arrowPng from '../assets/down_arrow.png';
 
 export const SearchHeader = styled.div`
   position: fixed;
   top: 0;
   left: 0%;
   width: 100%;
+  background-color: #fff;
 `;
 
 export const SearchInput = styled.input`
@@ -21,6 +24,8 @@ export const SearchInput = styled.input`
   color: #484848;
   outline: none;
   margin-left: 90px;
+  position: relative;
+  z-index: 12;
   transition: ease-out 0.3s;
 `;
 
@@ -34,6 +39,8 @@ export const CancelButton = styled.div`
   color: #484848;
   font-weight: 600;
   text-align: center;
+  position: relative;
+  z-index: 12;
 `;
 
 export const SearchListBox = styled.div`
@@ -105,4 +112,59 @@ export const FilterButtonArea = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 0 24px;
+`;
+
+export const LogoArea = styled.div<{ active: boolean }>`
+  height: 64px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  width: 100%;
+  background-color: #fff;
+  transition-delay: 0.3s;
+  transition-property: z-index;
+
+  ${({ active }) =>
+    active &&
+    css`
+      transition-delay: unset;
+      z-index: 14;
+
+      ${BreakPointArrow} {
+        transform: rotateZ(180deg);
+      }
+    `}
+`;
+
+export const ShowMenuButton = styled.button`
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  padding: 0 24px;
+  align-items: center;
+  border: none;
+  background: none;
+  background-color: none;
+  outline: none;
+`;
+
+export const Logo = styled.div`
+  width: 34px;
+  height: 34px;
+  background-image: url(${logoPng});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+`;
+
+export const BreakPointArrow = styled.div`
+  transition: transform 0.2s;
+  margin-left: 9px;
+  color: #aaa;
+  width: 9px;
+  height: 9px;
+  background-image: url(${down_arrowPng});
+  background-size: contain;
+  background-position: center center;
 `;

@@ -12,6 +12,7 @@ import { DateRangeFilterDropdownButton } from '../DateRangeFilterDropdownButton'
 import { TypeFilterDropdownButton } from '../TypeFilterDropdownButton';
 import * as S from './styles';
 import { Divider } from '../Divider';
+import { MenuDialog } from '../MenuDialog';
 
 interface SearchHeaderProps {
   onSearch: (arg: {
@@ -23,11 +24,13 @@ interface SearchHeaderProps {
     type: null | '공용' | '개인';
   }) => void;
   savedSearchKeywords: string[];
+  isLogined: boolean;
 }
 
 export const SearchHeader: FC<SearchHeaderProps> = ({
   onSearch,
   savedSearchKeywords,
+  isLogined,
 }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [dates, setDates] = useState<{
@@ -36,6 +39,11 @@ export const SearchHeader: FC<SearchHeaderProps> = ({
   }>({ startDate: null, endDate: null });
   const [type, setType] = useState<null | '공용' | '개인'>(null);
   const [isFocusedOnSearchInput, setIsFocusOnSearchInput] = useState(false);
+  const [active, setActive] = useState(false);
+
+  const handleClickShowMenuButton = useCallback(() => {
+    setActive(!active);
+  },                                            [active]);
 
   const handleChangeSearchInput = useCallback(
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -115,6 +123,13 @@ export const SearchHeader: FC<SearchHeaderProps> = ({
         onSubmit={handleSearchFormSubmit}
         isFocused={isFocusedOnSearchInput}
       >
+        <S.LogoArea active={active}>
+          <S.ShowMenuButton onClick={handleClickShowMenuButton}>
+            <S.Logo />
+            <S.BreakPointArrow />
+          </S.ShowMenuButton>
+        </S.LogoArea>
+        <MenuDialog isLogined={isLogined} showMenu={active} />
         <S.SearchInput
           value={searchKeyword}
           onChange={handleChangeSearchInput}
