@@ -7,6 +7,8 @@ import { History } from 'history';
 
 interface Props {
   history: History;
+  changeToken(token: string): void;
+  changeIsAdmin(isAdmin: boolean): void;
 }
 
 interface FacebookLoginResponse {
@@ -20,21 +22,27 @@ interface FacebookLoginResponse {
   userID: string;
 }
 
-export const Signin: React.FC<Props> = ({ history }) => {
+export const Signin: React.FC<Props> = ({
+  history,
+  changeToken,
+  changeIsAdmin,
+}) => {
   const responseFacebook = (response: FacebookLoginResponse) => {
-    signin(response.accessToken).then(res => {
-      setLocalStorageItem('token', res.data.token);
-      if (res.status === 201) {
-        history.push('/signup');
-      } else {
-        history.push('/');
-      }
-    })
-    .catch(e => {
-      if (e.response.status === 405) {
-        alert('로그인에 실패했습니다.');
-      }
-    });
+    signin(response.accessToken)
+      .then(res => {
+        if (res.status === 201) {
+          setLocalStorageItem('token', res.data.token);
+          history.push('/signup');
+        } else if (res.status === 200) {
+          setLocalStorageItem('token', res.data.token);
+          changeToken(res.data.token);
+          changeIsAdmin(res.data.isAdmin);
+          history.push('/');
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
   const appId: string = process.env.REACT_APP_FACEBOOK_APP_ID || '';
 

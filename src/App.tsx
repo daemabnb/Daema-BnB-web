@@ -5,12 +5,13 @@ import { createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
-import { Signup, Signin } from './pages';
+import { Signup } from './pages';
 
 import {
   RegisterShareItemInfoContainer,
   RegisterShareItemPeriodContainer,
   RegisterSaleItemInfoContainer,
+  SigninContainer,
 } from './containers';
 
 interface Props {}
@@ -37,7 +38,7 @@ class App extends React.Component<Props, State> {
           <GlobalStyle />
           <Switch>
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/signin" component={Signin} />
+            <Route exact path="/signin" component={SigninContainer} />
             <Route
               exact
               path="/register/share/item"
