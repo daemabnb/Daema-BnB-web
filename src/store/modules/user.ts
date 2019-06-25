@@ -1,3 +1,5 @@
+import { getLocalStorageItem } from '../../lib';
+
 export interface UserState {
   token: string;
   isAdmin: boolean;
@@ -36,7 +38,7 @@ export const actionCreators = {
 };
 
 const initialState: UserState = {
-  token: '',
+  token: getLocalStorageItem('token') || '',
   isAdmin: false,
 };
 
