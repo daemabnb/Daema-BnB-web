@@ -16,6 +16,8 @@ interface Props {
   date: Moment | null;
   period: number;
   isPublic: boolean;
+  token: string;
+  isAdmin: boolean;
   RegisterActions: typeof registerActions;
 }
 
@@ -27,6 +29,10 @@ class RegisterShareItemPeriodContainer extends React.Component<Props> {
   onChangePeriod = (period: number) => {
     const { RegisterActions } = this.props;
     RegisterActions.changePeriod(period);
+  }
+  onChangeIsPublic = (isPuiblic: boolean) => {
+    const { RegisterActions } = this.props;
+    RegisterActions.changeIsPublic(isPuiblic);
   }
   onDeleteRegistration = () => {
     const { RegisterActions } = this.props;
@@ -42,6 +48,8 @@ class RegisterShareItemPeriodContainer extends React.Component<Props> {
       date,
       period,
       isPublic,
+      token,
+      isAdmin,
     } = this.props;
     return (
       <RegisterShareItemPeriod
@@ -53,8 +61,11 @@ class RegisterShareItemPeriodContainer extends React.Component<Props> {
         date={date}
         period={period}
         isPublic={isPublic}
+        token={token}
+        isAdmin={isAdmin}
         changeDate={this.onChangeDate}
         changePeriod={this.onChangePeriod}
+        changeIsPublic={this.onChangeIsPublic}
         deleteRegistration={this.onDeleteRegistration}
       />
     );
@@ -62,7 +73,7 @@ class RegisterShareItemPeriodContainer extends React.Component<Props> {
 }
 
 export default connect(
-  ({ registration }: StoreState) => {
+  ({ registration, user }: StoreState) => {
     const {
       name,
       images,
@@ -72,6 +83,7 @@ export default connect(
       period,
       isPublic,
     } = registration;
+    const { token, isAdmin } = user;
     return {
       name,
       images,
@@ -80,6 +92,8 @@ export default connect(
       date,
       period,
       isPublic,
+      token,
+      isAdmin,
     };
   },
   (dispatch: any) => ({

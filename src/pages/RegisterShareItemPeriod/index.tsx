@@ -3,11 +3,14 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { SingleDatePicker } from 'react-dates';
 import { Moment } from 'moment';
-import { Button, LabeledNumberInput } from '../../presentations';
+import {
+  Button,
+  LabeledNumberInput,
+  LabeledCheckbox,
+} from '../../presentations';
 import * as S from './styles';
 import { History } from 'history';
 import { registerShareItem, modifyItemImage } from '../../lib';
-import { getLocalStorageItem } from '../../lib/localStorage';
 
 interface Props {
   history: History;
@@ -18,8 +21,11 @@ interface Props {
   date: Moment | null;
   period: number;
   isPublic: boolean;
+  token: string;
+  isAdmin?: boolean;
   changeDate(date: Moment | null): void;
   changePeriod(period: number): void;
+  changeIsPublic(isPublic: boolean): void;
   deleteRegistration(): void;
 }
 
@@ -32,8 +38,11 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
   date,
   period,
   isPublic,
+  token,
+  isAdmin = false,
   changeDate,
   changePeriod,
+  changeIsPublic,
   deleteRegistration,
 }) => {
   const [focused, changeFocus] = useState(false);
@@ -48,9 +57,8 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
     deleteRegistration();
   };
   const onRegisterShareItem = () => {
-    const token: string = getLocalStorageItem('token') || '';
     const imageNames = images.map(image => (image ? image.name : ''));
-    const deadline = date ? date.valueOf() : 0;
+    const deadline = date ? date.set({ hour: 24 }).valueOf() : 0;
     registerShareItem(
       name,
       imageNames,
@@ -73,7 +81,13 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
       }
     });
   };
-
+  const CheckBox = isAdmin && (
+    <LabeledCheckbox
+      isChecked={isPublic}
+      onChange={changeIsPublic}
+      label="공용물품"
+    />
+  );
   return (
     <S.RegisterShareItemPeriod>
       <p>제한 날짜</p>
@@ -95,6 +109,7 @@ export const RegisterShareItemPeriod: React.FC<Props> = ({
         value={period}
         placeholder="공유기간 (일)"
       />
+      {CheckBox}
       <S.ButtonWrapper>
         <Button content="뒤로 가기" onClick={handlePrevPage} />
         <Button content="완료" onClick={onRegisterShareItem} />
