@@ -10,6 +10,7 @@ export interface LabeledTextInputProps {
   label?: string;
   placeholder?: string;
   type?: string;
+  disabled?: boolean;
 }
 
 export class LabeledTextInput extends Component<LabeledTextInputProps> {
@@ -21,17 +22,18 @@ export class LabeledTextInput extends Component<LabeledTextInputProps> {
   }
 
   render() {
-    const { className, value, label, placeholder, type } = this.props;
-
+    const { className, value, label, placeholder, type, disabled = false } = this.props;
+    const conditionalLabel = label && <S.Label>{label}</S.Label>;
     return (
       <S.LabeledTextInput>
-        <S.Label>{label}</S.Label>
+        {conditionalLabel}
         <S.TextInput
           className={className}
           onChange={this.handleChange}
           type={type}
           value={value}
           placeholder={placeholder}
+          disabled={disabled}
         />
       </S.LabeledTextInput>
     );

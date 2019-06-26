@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonProps {
   size: 'big' | 'small';
+  disabled: boolean;
 }
 
 export const Button = styled.div`
@@ -9,11 +10,17 @@ export const Button = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   display: ${(props: ButtonProps) =>
-    props.size === 'big' ? 'block' : 'inline-block'};
-  padding: 10px 8px;
+    props.size === 'big' ? 'flex' : 'inline-flex'};
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 12px;
+  word-break: keep-all;
   text-align: center;
   font-size: 16px;
   font-weight: 800;
   color: #fff;
-  background-color: #008489;
+  ${(props: ButtonProps) => css`
+    background: ${props.disabled ? '#006468' : '#008489'}
+  `}
 `;

@@ -1,13 +1,15 @@
 {
   "extends": ["tslint-config-airbnb", "tslint-react"],
   "rules": {
-    "import-name": [true, { "styledComponents": "styled", "react": "React" }],
+    "import-name": [true, { "styledComponents": "styled", "react": "React", "reactFacebookLogin": "FacebookLogin" }],
     "variable-name": [
       true,
       "ban-keywords",
       "check-format",
       "allow-pascal-case"
     ],
-    "ter-arrow-parens": [true, "as-needed"]
+    "ter-arrow-parens": [true, "as-needed"],
+    "jsx-boolean-value": false,
+    "no-increment-decrement": false
   }
 }
