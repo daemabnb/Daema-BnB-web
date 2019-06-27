@@ -2,8 +2,9 @@ import React from 'react';
 import { RegisterSaleItemInfo } from '../pages';
 import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
-import { actionCreators as registerActions } from '../store/modules/register';
-import { bindActionCreators } from 'redux';
+import {
+  actionCreators as registerActions,
+} from '../store/modules/register';
 import { RouteComponentProps } from 'react-router';
 
 interface Props extends RouteComponentProps {
@@ -11,36 +12,29 @@ interface Props extends RouteComponentProps {
   images: File[];
   explanation: string;
   price: number;
-  RegisterActions: typeof registerActions;
+  deleteRegistration(): void;
+  changeName(name: string): void;
+  changeImage(index: number, image: FileList): void;
+  deleteImage(index: number): void;
+  changeExplanation(explanation: string): void;
+  changePrice(price: number): void;
 }
 
 class RegisterSaleItemInfoContainer extends React.Component<Props> {
-  onChangeName = (name: string) => {
-    const { RegisterActions } = this.props;
-    RegisterActions.changeName(name);
-  }
-  onChangeImage = (index: number, image: FileList) => {
-    const { RegisterActions } = this.props;
-    RegisterActions.changeImage(index, image);
-  }
-  onDeleteImage = (index: number) => {
-    const { RegisterActions } = this.props;
-    RegisterActions.deleteImage(index);
-  }
-  onChangeExplanation = (explanation: string) => {
-    const { RegisterActions } = this.props;
-    RegisterActions.changeExplanation(explanation);
-  }
-  onChangePrice = (price: number) => {
-    const { RegisterActions } = this.props;
-    RegisterActions.changePrice(price);
-  }
-  onDeleteRegistration = () => {
-    const { RegisterActions } = this.props;
-    RegisterActions.deleteRegistration();
-  }
   render() {
-    const { name, images, explanation, price, history } = this.props;
+    const {
+      name,
+      images,
+      explanation,
+      price,
+      history,
+      deleteRegistration,
+      changeName,
+      changeImage,
+      deleteImage,
+      changeExplanation,
+      changePrice,
+    } = this.props;
     return (
       <RegisterSaleItemInfo
         history={history}
@@ -48,12 +42,12 @@ class RegisterSaleItemInfoContainer extends React.Component<Props> {
         images={images}
         explanation={explanation}
         price={price}
-        changeName={this.onChangeName}
-        changeImage={this.onChangeImage}
-        deleteImage={this.onDeleteImage}
-        changeExplanation={this.onChangeExplanation}
-        changePrice={this.onChangePrice}
-        onDeleteRegistration={this.onDeleteRegistration}
+        changeName={changeName}
+        changeImage={changeImage}
+        deleteImage={deleteImage}
+        changeExplanation={changeExplanation}
+        changePrice={changePrice}
+        onDeleteRegistration={deleteRegistration}
       />
     );
   }
@@ -69,7 +63,5 @@ export default connect(
       price,
     };
   },
-  (dispatch: any) => ({
-    RegisterActions: bindActionCreators(registerActions, dispatch),
-  }),
+  registerActions,
 )(RegisterSaleItemInfoContainer);
