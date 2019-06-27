@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
 import { actionCreators as userActions } from '../store/modules/user';
 import { bindActionCreators } from 'redux';
-import { History } from 'history';
+import { RouteComponentProps } from 'react-router';
 
-interface Props {
+interface Props extends RouteComponentProps {
   UserActions: typeof userActions;
-  history: History;
 }
 
 class SigninContainer extends React.Component<Props> {

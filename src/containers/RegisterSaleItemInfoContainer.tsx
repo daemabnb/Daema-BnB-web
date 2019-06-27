@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
 import { actionCreators as registerActions } from '../store/modules/register';
 import { bindActionCreators } from 'redux';
-import { History } from 'history';
+import { RouteComponentProps } from 'react-router';
 
-interface Props {
-  history: History;
+interface Props extends RouteComponentProps {
   name: string;
   images: File[];
   explanation: string;
