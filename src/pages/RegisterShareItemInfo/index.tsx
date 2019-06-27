@@ -47,6 +47,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
       key={i}
     />
   ));
+  const isCoverImage = images.length === 0;
   return (
     <S.RegisterShareItemInfo>
       <LabeledTextInput
@@ -59,8 +60,9 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
       <ImageUploader
         onChange={changeImage.bind(null, images.length)}
         onDelete={deleteImage.bind(null, images.length)}
-        id="1234567"
+        id="share-item-image-uploader"
         image={images[images.length]}
+        isCoverImage={isCoverImage}
       />
       <LabeledDescriptionInput
         value={explanation}

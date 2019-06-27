@@ -10,7 +10,6 @@ import {
 } from '../../presentations';
 import {
   registerSaleItem,
-  getLocalStorageItem,
   modifyItemImage,
 } from '../../lib';
 
@@ -20,6 +19,7 @@ interface Props {
   images: File[];
   explanation: string;
   price: number;
+  token: string;
   changeName(name: string): void;
   changeImage(index: number, image: FileList): void;
   deleteImage(index: number): void;
@@ -34,6 +34,7 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
   images,
   explanation,
   price,
+  token,
   changeName,
   changeImage,
   deleteImage,
@@ -45,7 +46,6 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
     history.push('/');
   };
   const onRegister = () => {
-    const token = getLocalStorageItem('token') || '';
     registerSaleItem(
       name,
       images.map(image => image.name),
@@ -73,6 +73,7 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
       key={i}
     />
   ));
+  const isCoverImage = images.length === 0;
   return (
     <S.RegisterSaleItemInfo>
       <LabeledTextInput
@@ -85,8 +86,9 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
       <ImageUploader
         onChange={changeImage.bind(null, images.length)}
         onDelete={deleteImage.bind(null, images.length)}
-        id="1234567"
+        id="sale-item-image-uploader"
         image={images[images.length]}
+        isCoverImage={isCoverImage}
       />
       <LabeledDescriptionInput
         value={explanation}
