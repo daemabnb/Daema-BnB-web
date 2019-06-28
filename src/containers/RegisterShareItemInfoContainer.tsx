@@ -42,7 +42,7 @@ class RegisterShareItemInfoContainer extends React.Component<Props> {
     const imageNames = images.map(image => image.name);
     const deadline = date ? date.set({ hour: 24 }).valueOf() : 0;
     try {
-      const registerItemResponse = await registerShareItem(
+      const { data: registerShareItemResponse } = await registerShareItem(
         name,
         imageNames,
         explanation,
@@ -52,7 +52,7 @@ class RegisterShareItemInfoContainer extends React.Component<Props> {
         isPublic,
         token,
       );
-      return registerItemResponse.data.urls;
+      return registerShareItemResponse.urls;
     } catch (e) {
       console.log(e);
       return [];
