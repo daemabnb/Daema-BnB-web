@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { signin } from '../../lib/user';
-import { setLocalStorageItem } from '../../lib';
+import { setToken } from '../../lib';
 import * as S from './styles';
 import { History } from 'history';
 
@@ -31,10 +31,10 @@ export const Signin: React.FC<Props> = ({
     signin(response.accessToken)
       .then(res => {
         if (res.status === 201) {
-          setLocalStorageItem('token', res.data.token);
+          setToken(res.data.token);
           history.push('/signup');
         } else if (res.status === 200) {
-          setLocalStorageItem('token', res.data.token);
+          setToken(res.data.token);
           changeToken(res.data.token);
           changeIsAdmin(res.data.isAdmin);
           history.push('/');
