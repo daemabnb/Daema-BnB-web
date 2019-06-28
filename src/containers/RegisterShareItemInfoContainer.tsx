@@ -121,26 +121,9 @@ class RegisterShareItemInfoContainer extends React.Component<Props> {
 
 export default connect(
   ({ registration, user }: StoreState) => {
-    const {
-      name,
-      images,
-      explanation,
-      price,
-      date,
-      period,
-      isPublic,
-    } = registration;
-    const { token, isAdmin } = user;
     return {
-      name,
-      images,
-      explanation,
-      price,
-      date,
-      period,
-      isPublic,
-      token,
-      isAdmin,
+      ...user,
+      ...registration,
     };
   },
   registerActions,
