@@ -1,5 +1,4 @@
 import React from 'react';
-import { History } from 'history';
 import * as S from './styles';
 import {
   LabeledTextInput,
@@ -8,13 +7,8 @@ import {
   ImageUploader,
   Button,
 } from '../../presentations';
-import {
-  registerSaleItem,
-  modifyItemImage,
-} from '../../lib';
 
 interface Props {
-  history: History;
   name: string;
   images: File[];
   explanation: string;
@@ -25,11 +19,19 @@ interface Props {
   deleteImage(index: number): void;
   changeExplanation(explanation: string): void;
   changePrice(price: number): void;
-  onDeleteRegistration(): void;
+  deleteRegistration(): void;
+  registerSaleItem(
+    name: string,
+    images: File[],
+    explanation: string,
+    price: number,
+    token: string,
+  ): Promise<string[]>;
+  modifyImages(urls: string[], images: File[]): void;
+  routeToMain(): void;
 }
 
 export const RegisterSaleItemInfo: React.FC<Props> = ({
-  history,
   name,
   images,
   explanation,
@@ -40,30 +42,11 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
   deleteImage,
   changeExplanation,
   changePrice,
-  onDeleteRegistration,
+  deleteRegistration,
+  registerSaleItem,
+  modifyImages,
+  routeToMain,
 }) => {
-  const handleNextPage = () => {
-    history.push('/');
-  };
-  const onRegister = () => {
-    registerSaleItem(
-      name,
-      images.map(image => image.name),
-      explanation,
-      price,
-      token,
-    ).then(res => {
-      try {
-        res.data.urls.forEach((url, i) => {
-          modifyItemImage(url, images[i]);
-        });
-        onDeleteRegistration();
-        handleNextPage();
-      } catch (e) {
-        console.log(e);
-      }
-    });
-  };
   const imageUploaders = images.map((image, i) => (
     <ImageUploader
       onChange={changeImage.bind(null, i)}
@@ -74,6 +57,12 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
     />
   ));
   const isCoverImage = images.length === 0;
+  const onRegisterSaleItem = async () => {
+    const imageUrls = await registerSaleItem(name, images, explanation, price, token);
+    modifyImages(imageUrls, images);
+    deleteRegistration();
+    routeToMain();
+  };
   return (
     <S.RegisterSaleItemInfo>
       <LabeledTextInput
@@ -102,7 +91,7 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
         placeholder="0"
         label="가격"
       />
-      <Button size="big" content="완료" onClick={onRegister} />
+      <Button size="big" content="완료" onClick={onRegisterSaleItem} />
     </S.RegisterSaleItemInfo>
   );
 };
