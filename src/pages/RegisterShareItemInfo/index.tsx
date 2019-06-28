@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { SingleDatePicker } from 'react-dates';
+import { Moment } from 'moment';
 import { History } from 'history';
-
 import {
   LabeledTextInput,
   LabeledPriceInput,
   LabeledDescriptionInput,
   ImageUploader,
   Button,
+  LabeledNumberInput,
+  LabeledCheckbox,
 } from '../../presentations';
 import * as S from './styles';
 
@@ -16,11 +21,32 @@ interface Props {
   images: File[];
   explanation: string;
   price: number;
+  date: Moment | null;
+  period: number;
+  isPublic: boolean;
+  token: string;
+  isAdmin: boolean;
   changeName(name: string): void;
   changeImage(index: number, image: FileList): void;
   deleteImage(index: number): void;
   changeExplanation(explanation: string): void;
   changePrice(price: number): void;
+  changeDate(date: Moment | null): void;
+  changePeriod(period: number): void;
+  changeIsPublic(isPublic: boolean): void;
+  deleteRegistration(): void;
+  registerShareItem(
+    name: string,
+    images: File[],
+    explanation: string,
+    price: number,
+    date: Moment | null,
+    period: number,
+    isPublic: boolean,
+    token: string,
+  ): Promise<string[]>;
+  modifyImages(urls: string[], images: File[]): void;
+  routeToMain():void;
 }
 
 export const RegisterShareItemInfo: React.FC<Props> = ({
@@ -29,15 +55,24 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
   images,
   explanation,
   price,
+  date,
+  period,
+  isPublic,
+  token,
+  isAdmin = false,
   changeName,
   changeImage,
   deleteImage,
   changeExplanation,
   changePrice,
+  changeDate,
+  changePeriod,
+  changeIsPublic,
+  deleteRegistration,
+  registerShareItem,
+  modifyImages,
+  routeToMain,
 }) => {
-  const handleNextPage = () => {
-    history.push('/register/share/period');
-  };
   const imageUploaders = images.map((image, i) => (
     <ImageUploader
       onChange={changeImage.bind(null, i)}
@@ -48,6 +83,31 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
     />
   ));
   const isCoverImage = images.length === 0;
+  const [focused, changeFocus] = useState(false);
+  const handleChangeFocus = ({ focused }: { focused: boolean | null }) => {
+    changeFocus(focused === null ? false : focused);
+  };
+  const CheckBox = isAdmin && (
+    <LabeledCheckbox
+      isChecked={isPublic}
+      onChange={changeIsPublic}
+      label="공용물품"
+    />
+  );
+  const onRegisterShareItem = async () => {
+    const imageUrls = await registerShareItem(
+      name,
+      images,
+      explanation,
+      price,
+      date,
+      period,
+      isPublic,
+      token,
+    );
+    modifyImages(imageUrls, images);
+    routeToMain();
+  };
   return (
     <S.RegisterShareItemInfo>
       <LabeledTextInput
@@ -76,8 +136,28 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
         placeholder="0"
         label="가격"
       />
+      <p>제한 날짜</p>
+      <SingleDatePicker
+        date={date}
+        onDateChange={changeDate}
+        focused={focused}
+        onFocusChange={handleChangeFocus}
+        id="12344"
+        numberOfMonths={1}
+        small={false}
+        block={true}
+        orientation="horizontal"
+        hideKeyboardShortcutsPanel={true}
+        placeholder="공유마감기한"
+      />
+      <LabeledNumberInput
+        onChange={changePeriod}
+        value={period}
+        placeholder="공유기간 (일)"
+      />
+      {CheckBox}
       <S.ButtonWrapper>
-        <Button content="다음" onClick={handleNextPage} />
+        <Button content="완료" onClick={onRegisterShareItem} size="big" />
       </S.ButtonWrapper>
     </S.RegisterShareItemInfo>
   );

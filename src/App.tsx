@@ -9,7 +9,6 @@ import { Signup } from './pages';
 
 import {
   RegisterShareItemInfoContainer,
-  RegisterShareItemPeriodContainer,
   RegisterSaleItemInfoContainer,
   SigninContainer,
 } from './containers';
@@ -43,11 +42,6 @@ class App extends React.Component<Props, State> {
               exact
               path="/register/share/item"
               component={RegisterShareItemInfoContainer}
-            />
-            <Route
-              exact
-              path="/register/share/period"
-              component={RegisterShareItemPeriodContainer}
             />
             <Route
               exact
