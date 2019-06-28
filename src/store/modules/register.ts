@@ -151,6 +151,18 @@ export const actionCreators = {
   changeIsPublic,
 };
 
+export interface RegisterActionCreators {
+  deleteRegistration(): void;
+  changeName(name: string): void;
+  changeImage(index: number, image: FileList): void;
+  deleteImage(index: number): void;
+  changeExplanation(explanation: string): void;
+  changePrice(price: number): void;
+  changeDate(date: Moment | null): void;
+  changePeriod(period: number): void;
+  changeIsPublic(isPublic: boolean): void;
+}
+
 const initialState: RegistrationState = {
   name: '',
   images: [],

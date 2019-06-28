@@ -3,7 +3,6 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { SingleDatePicker } from 'react-dates';
 import { Moment } from 'moment';
-import { History } from 'history';
 import {
   LabeledTextInput,
   LabeledPriceInput,
@@ -14,27 +13,14 @@ import {
   LabeledCheckbox,
 } from '../../presentations';
 import * as S from './styles';
+import {
+  RegistrationState,
+  RegisterActionCreators,
+} from '../../store/modules/register';
 
-interface Props {
-  history: History;
-  name: string;
-  images: File[];
-  explanation: string;
-  price: number;
-  date: Moment | null;
-  period: number;
-  isPublic: boolean;
+interface Props extends RegistrationState, RegisterActionCreators {
   token: string;
   isAdmin: boolean;
-  changeName(name: string): void;
-  changeImage(index: number, image: FileList): void;
-  deleteImage(index: number): void;
-  changeExplanation(explanation: string): void;
-  changePrice(price: number): void;
-  changeDate(date: Moment | null): void;
-  changePeriod(period: number): void;
-  changeIsPublic(isPublic: boolean): void;
-  deleteRegistration(): void;
   registerShareItem(
     name: string,
     images: File[],
@@ -46,11 +32,10 @@ interface Props {
     token: string,
   ): Promise<string[]>;
   modifyImages(urls: string[], images: File[]): void;
-  routeToMain():void;
+  routeToMain(): void;
 }
 
 export const RegisterShareItemInfo: React.FC<Props> = ({
-  history,
   name,
   images,
   explanation,
@@ -59,7 +44,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
   period,
   isPublic,
   token,
-  isAdmin = false,
+  isAdmin,
   changeName,
   changeImage,
   deleteImage,
@@ -106,6 +91,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
       token,
     );
     modifyImages(imageUrls, images);
+    deleteRegistration();
     routeToMain();
   };
   return (

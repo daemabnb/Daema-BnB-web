@@ -3,29 +3,20 @@ import { Moment } from 'moment';
 import { RegisterShareItemInfo } from '../pages';
 import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
-import { actionCreators as registerActions } from '../store/modules/register';
+import {
+  RegistrationState,
+  actionCreators as registerActions,
+  RegisterActionCreators,
+} from '../store/modules/register';
 import { RouteComponentProps } from 'react-router';
 import { registerShareItem, modifyItemImage } from '../lib';
 
-interface Props extends RouteComponentProps {
-  name: string;
-  images: File[];
-  explanation: string;
-  price: number;
-  date: Moment | null;
-  period: number;
-  isPublic: boolean;
+interface Props
+  extends RouteComponentProps,
+    RegistrationState,
+    RegisterActionCreators {
   token: string;
   isAdmin: boolean;
-  deleteRegistration(): void;
-  changeName(name: string): void;
-  changeImage(index: number, image: FileList): void;
-  deleteImage(index: number): void;
-  changeExplanation(explanation: string): void;
-  changePrice(price: number): void;
-  changeDate(date: Moment | null): void;
-  changePeriod(period: number): void;
-  changeIsPublic(isPublic: boolean): void;
 }
 
 class RegisterShareItemInfoContainer extends React.Component<Props> {
@@ -69,48 +60,9 @@ class RegisterShareItemInfoContainer extends React.Component<Props> {
     this.props.history.push('/');
   }
   render() {
-    const {
-      history,
-      name,
-      images,
-      explanation,
-      price,
-      date,
-      period,
-      isPublic,
-      token,
-      isAdmin,
-      deleteRegistration,
-      changeName,
-      changeImage,
-      deleteImage,
-      changeExplanation,
-      changePrice,
-      changeDate,
-      changePeriod,
-      changeIsPublic,
-    } = this.props;
     return (
       <RegisterShareItemInfo
-        history={history}
-        name={name}
-        images={images}
-        explanation={explanation}
-        price={price}
-        date={date}
-        period={period}
-        isPublic={isPublic}
-        token={token}
-        isAdmin={isAdmin}
-        changeName={changeName}
-        changeImage={changeImage}
-        deleteImage={deleteImage}
-        changeExplanation={changeExplanation}
-        changePrice={changePrice}
-        changeDate={changeDate}
-        changePeriod={changePeriod}
-        changeIsPublic={changeIsPublic}
-        deleteRegistration={deleteRegistration}
+        {...this.props}
         registerShareItem={this.registerShareItem}
         modifyImages={this.modifyImages}
         routeToMain={this.routeToMain}
