@@ -87,7 +87,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
   const handleChangeFocus = ({ focused }: { focused: boolean | null }) => {
     changeFocus(focused === null ? false : focused);
   };
-  const CheckBox = isAdmin && (
+  const checkBox = isAdmin && (
     <LabeledCheckbox
       isChecked={isPublic}
       onChange={changeIsPublic}
@@ -155,7 +155,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
         value={period}
         placeholder="공유기간 (일)"
       />
-      {CheckBox}
+      {checkBox}
       <S.ButtonWrapper>
         <Button content="완료" onClick={onRegisterShareItem} size="big" />
       </S.ButtonWrapper>
