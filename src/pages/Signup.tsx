@@ -1,52 +1,45 @@
 import React, { useState } from 'react';
-
 import { EmailChecker, LabeledTextInput, Button } from '../presentations';
 import { authMail, signup } from '../lib/user';
 import { getToken } from '../lib';
-import { History } from 'history';
+import { RouteComponentProps } from 'react-router';
 
-interface Props {
-  history: History;
-}
+interface Props extends RouteComponentProps {}
 
 export const Signup: React.FC<Props> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [validation, setValidation] = useState('');
   const [emailSended, setEmailSended] = useState(false);
   const token = getToken();
-  const checkToken = () => {
-    if (!token) {
-      alert('facebook 로그인이 필요합니다.');
-      history.push('/signin');
+  const onNeedLogin = () => {
+    alert('facebook 로그인이 필요합니다.');
+    history.push('/signin');
+  };
+  if (!token) {
+    onNeedLogin();
+  }
+  const onAuthEmail = async () => {
+    if (token) {
+      try {
+        const { status } = await authMail(email, token);
+        if (status === 201) {
+          setEmailSended(true);
+        }
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
-  checkToken();
-  const onAuthEmail = () => {
-    checkToken();
+  const onSignup = async () => {
     if (token) {
-      authMail(email, token)
-        .then(res => {
-          if (res.status === 201) {
-            setEmailSended(true);
-          }
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
-  };
-  const onSignup = () => {
-    checkToken();
-    if (token) {
-      signup(email, validation, token)
-        .then(res => {
-          if (res.status === 201) {
-            history.push('/');
-          }
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      try {
+        const { status } = await signup(email, validation, token);
+        if (status === 201) {
+          history.push('/');
+        }
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   return (
