@@ -3,7 +3,7 @@ import basedApi from './basedApi';
 interface RegisterShareItemResponse {
   urls: string[];
 }
-export const registerShareItem = (
+export const registerShareItem = async (
   itemName: string,
   images: string[],
   itemDescription: string,
@@ -12,8 +12,8 @@ export const registerShareItem = (
   period: number,
   isPublic: boolean,
   token: string,
-) =>
-  basedApi.post<RegisterShareItemResponse>(
+) => {
+  const { data, status } = await basedApi.post<RegisterShareItemResponse>(
     'share',
     {
       itemName,
@@ -30,3 +30,5 @@ export const registerShareItem = (
       },
     },
   );
+  return { data, status };
+};
