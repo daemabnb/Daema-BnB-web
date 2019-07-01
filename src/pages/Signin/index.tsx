@@ -3,12 +3,11 @@ import FacebookLogin from 'react-facebook-login';
 import { signin } from '../../lib/user';
 import { setToken } from '../../lib';
 import * as S from './styles';
-import { History } from 'history';
+import { UserActionCreators } from '../../store/modules/user';
 
-interface Props {
-  history: History;
-  changeToken(token: string): void;
-  changeIsAdmin(isAdmin: boolean): void;
+interface Props extends UserActionCreators {
+  routeToMain(): void;
+  routeToSignup(): void;
 }
 
 interface FacebookLoginResponse {
@@ -23,26 +22,26 @@ interface FacebookLoginResponse {
 }
 
 export const Signin: React.FC<Props> = ({
-  history,
   changeToken,
-  changeIsAdmin,
+  changeAdminState,
+  routeToMain,
+  routeToSignup,
 }) => {
-  const responseFacebook = (response: FacebookLoginResponse) => {
-    signin(response.accessToken)
-      .then(res => {
-        if (res.status === 201) {
-          setToken(res.data.token);
-          history.push('/signup');
-        } else if (res.status === 200) {
-          setToken(res.data.token);
-          changeToken(res.data.token);
-          changeIsAdmin(res.data.isAdmin);
-          history.push('/');
-        }
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  const onFacebookLogin = async ({ accessToken }: FacebookLoginResponse) => {
+    try {
+      const { status, data } = await signin(accessToken);
+      if (status === 201) {
+        setToken(data.token);
+        routeToSignup();
+      } else if (status === 200) {
+        setToken(data.token);
+        changeToken(data.token);
+        changeAdminState(data.isAdmin);
+        routeToMain();
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   const appId: string = process.env.REACT_APP_FACEBOOK_APP_ID || '';
 
@@ -51,7 +50,7 @@ export const Signin: React.FC<Props> = ({
       <FacebookLogin
         appId={appId}
         autoLoad={false}
-        callback={responseFacebook}
+        callback={onFacebookLogin}
       />
     </S.Signin>
   );

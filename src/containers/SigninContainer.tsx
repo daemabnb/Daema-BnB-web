@@ -1,38 +1,33 @@
 import React from 'react';
 import { Signin } from '../pages';
 import { connect } from 'react-redux';
-import { StoreState } from '../store/modules';
-import { actionCreators as userActions } from '../store/modules/user';
-import { bindActionCreators } from 'redux';
+import {
+  UserActionCreators,
+  actionCreators as userActions,
+} from '../store/modules/user';
 import { RouteComponentProps } from 'react-router';
 
-interface Props extends RouteComponentProps {
-  UserActions: typeof userActions;
-}
+interface Props extends RouteComponentProps, UserActionCreators {}
 
 class SigninContainer extends React.Component<Props> {
-  onChangeToken = (token: string) => {
-    const { UserActions } = this.props;
-    UserActions.changeToken(token);
+  routeToMain = () => {
+    this.props.history.push('/');
   }
-  onChangeIsAdmin = (isAdmin: boolean) => {
-    const { UserActions } = this.props;
-    UserActions.changeAdminState(isAdmin);
+  routeToSignup = () => {
+    this.props.history.push('/signup');
   }
   render() {
     return (
       <Signin
-        history={this.props.history}
-        changeToken={this.onChangeToken}
-        changeIsAdmin={this.onChangeIsAdmin}
+        {...this.props}
+        routeToMain={this.routeToMain}
+        routeToSignup={this.routeToSignup}
       />
     );
   }
 }
 
 export default connect(
-  ({ user }: StoreState) => user,
-  (dispatch: any) => ({
-    UserActions: bindActionCreators(userActions, dispatch),
-  }),
+  null,
+  userActions,
 )(SigninContainer);

@@ -38,7 +38,7 @@ export const actionCreators = {
 };
 
 export interface UserActionCreators {
-  changeTokens(token: string): void;
+  changeToken(token: string): void;
   changeAdminState(isAdmin: boolean): void;
 }
 
