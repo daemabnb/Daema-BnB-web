@@ -7,19 +7,13 @@ import {
   ImageUploader,
   Button,
 } from '../../presentations';
+import {
+  SaleItemState,
+  SaleItemActionCreators,
+} from '../../store/modules/saleItem';
 
-interface Props {
-  name: string;
-  images: File[];
-  explanation: string;
-  price: number;
+interface Props extends SaleItemState, SaleItemActionCreators {
   token: string;
-  changeName(name: string): void;
-  changeImage(index: number, image: FileList): void;
-  deleteImage(index: number): void;
-  changeExplanation(explanation: string): void;
-  changePrice(price: number): void;
-  deleteRegistration(): void;
   registerSaleItem(
     name: string,
     images: File[],
@@ -42,7 +36,7 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
   deleteImage,
   changeExplanation,
   changePrice,
-  deleteRegistration,
+  refreshItem,
   registerSaleItem,
   modifyImages,
   routeToMain,
@@ -58,9 +52,15 @@ export const RegisterSaleItemInfo: React.FC<Props> = ({
   ));
   const isCoverImage = images.length === 0;
   const onRegisterSaleItem = async () => {
-    const imageUrls = await registerSaleItem(name, images, explanation, price, token);
+    const imageUrls = await registerSaleItem(
+      name,
+      images,
+      explanation,
+      price,
+      token,
+    );
     modifyImages(imageUrls, images);
-    deleteRegistration();
+    refreshItem();
     routeToMain();
   };
   return (

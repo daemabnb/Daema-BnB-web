@@ -14,11 +14,11 @@ import {
 } from '../../presentations';
 import * as S from './styles';
 import {
-  RegistrationState,
-  RegisterActionCreators,
-} from '../../store/modules/register';
+  ShareItemState,
+  ShareItemActionCreators,
+} from '../../store/modules/shareItem';
 
-interface Props extends RegistrationState, RegisterActionCreators {
+interface Props extends ShareItemState, ShareItemActionCreators {
   token: string;
   isAdmin: boolean;
   registerShareItem(
@@ -53,7 +53,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
   changeDate,
   changePeriod,
   changeIsPublic,
-  deleteRegistration,
+  refreshItem,
   registerShareItem,
   modifyImages,
   routeToMain,
@@ -91,7 +91,7 @@ export const RegisterShareItemInfo: React.FC<Props> = ({
       token,
     );
     modifyImages(imageUrls, images);
-    deleteRegistration();
+    refreshItem();
     routeToMain();
   };
   return (

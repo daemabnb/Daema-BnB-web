@@ -1,13 +1,16 @@
 import { combineReducers } from 'redux';
-import { RegistrationState, registerReducer as registration } from './register';
 import { UserState, userReducer as user } from './user';
+import { ShareItemState, shareItemReducer as shareItem } from './shareItem';
+import { SaleItemState, saleItemReducer as saleItem } from './saleItem';
 
 export interface StoreState {
-  registration: RegistrationState;
   user: UserState;
+  shareItem: ShareItemState;
+  saleItem: SaleItemState;
 }
 
 export default combineReducers<StoreState>({
-  registration,
   user,
+  shareItem,
+  saleItem,
 });

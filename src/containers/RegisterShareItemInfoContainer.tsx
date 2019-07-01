@@ -4,17 +4,17 @@ import { RegisterShareItemInfo } from '../pages';
 import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
 import {
-  RegistrationState,
-  actionCreators as registerActions,
-  RegisterActionCreators,
-} from '../store/modules/register';
+  ShareItemState,
+  actionCreators as shareItemActions,
+  ShareItemActionCreators,
+} from '../store/modules/shareItem';
 import { RouteComponentProps } from 'react-router';
 import { registerShareItem, modifyItemImage } from '../lib';
 
 interface Props
   extends RouteComponentProps,
-    RegistrationState,
-    RegisterActionCreators {
+    ShareItemState,
+    ShareItemActionCreators {
   token: string;
   isAdmin: boolean;
 }
@@ -72,11 +72,11 @@ class RegisterShareItemInfoContainer extends React.Component<Props> {
 }
 
 export default connect(
-  ({ registration, user }: StoreState) => {
+  ({ shareItem, user }: StoreState) => {
     return {
       ...user,
-      ...registration,
+      ...shareItem,
     };
   },
-  registerActions,
+  shareItemActions,
 )(RegisterShareItemInfoContainer);

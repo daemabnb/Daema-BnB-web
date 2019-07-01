@@ -2,23 +2,20 @@ import React from 'react';
 import { RegisterSaleItemInfo } from '../pages';
 import { connect } from 'react-redux';
 import { StoreState } from '../store/modules';
-import { actionCreators as registerActions } from '../store/modules/register';
+import {
+  SaleItemState,
+  SaleItemActionCreators,
+  actionCreators as saleItemActions,
+} from '../store/modules/saleItem';
 import { actionCreators as userActions } from '../store/modules/user';
 import { RouteComponentProps } from 'react-router';
 import { registerSaleItem, modifyItemImage } from '../lib';
 
-interface Props extends RouteComponentProps {
-  name: string;
-  images: File[];
-  explanation: string;
-  price: number;
+interface Props
+  extends RouteComponentProps,
+    SaleItemState,
+    SaleItemActionCreators {
   token: string;
-  deleteRegistration(): void;
-  changeName(name: string): void;
-  changeImage(index: number, image: FileList): void;
-  deleteImage(index: number): void;
-  changeExplanation(explanation: string): void;
-  changePrice(price: number): void;
 }
 
 class RegisterSaleItemInfoContainer extends React.Component<Props> {
@@ -67,16 +64,12 @@ class RegisterSaleItemInfoContainer extends React.Component<Props> {
 }
 
 export default connect(
-  ({ registration, user }: StoreState) => {
-    const { name, images, explanation, price } = registration;
+  ({ saleItem, user }: StoreState) => {
     const { token } = user;
     return {
-      name,
-      images,
-      explanation,
-      price,
+      ...saleItem,
       token,
     };
   },
-  { ...registerActions, ...userActions },
+  { ...saleItemActions, ...userActions },
 )(RegisterSaleItemInfoContainer);
