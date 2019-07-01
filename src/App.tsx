@@ -21,6 +21,7 @@ const history = createBrowserHistory();
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    padding: 0 24px
   }
 
   div, input {
