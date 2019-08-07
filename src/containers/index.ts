@@ -4,6 +4,4 @@ export {
 export {
   default as RegisterSaleItemInfoContainer,
 } from './RegisterSaleItemInfoContainer';
-export {
-  default as SigninContainer,
-} from './SigninContainer';
+export { default as SigninContainer } from './SigninContainer';
