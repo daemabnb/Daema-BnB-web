@@ -11,6 +11,9 @@ export const Signup: React.FC<Props> = ({ history }) => {
   const [validation, setValidation] = useState('');
   const [emailSended, setEmailSended] = useState(false);
   const token = getToken();
+  const routeToMain = () => {
+    history.push('/');
+  };
   const onNeedLogin = () => {
     alert('facebook 로그인이 필요합니다.');
     history.push('/signin');
@@ -35,7 +38,7 @@ export const Signup: React.FC<Props> = ({ history }) => {
       try {
         const { status } = await signup(email, validation, token);
         if (status === 201) {
-          history.push('/');
+          routeToMain();
         }
       } catch (e) {
         console.log(e);
@@ -47,7 +50,7 @@ export const Signup: React.FC<Props> = ({ history }) => {
       <EmailChecker
         disabled={emailSended}
         email={email}
-        onChange={setEmail}
+        onChangeEmail={setEmail}
         onCheck={onAuthEmail}
       />
       <LabeledTextInput
